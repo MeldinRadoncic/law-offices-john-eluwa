@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Crimson_Text, Outfit } from 'next/font/google';
 import { motion } from 'motion/react';
-import { Menu, X, Calendar, Shield, Scale, Users, Award, MapPin, Phone, Mail, ChevronRight, Star, BookOpen, MessageCircle, Zap, Heart, Target, Linkedin, Facebook } from 'lucide-react';
+import { Menu, X, Calendar, Shield, Scale, Users, Award, MapPin, Phone, Mail, ChevronRight, Star, BookOpen, MessageCircle, Zap, Heart, Target } from 'lucide-react';
 
 const crimson = Crimson_Text({
   subsets: ['latin'],
@@ -688,8 +688,8 @@ export default function Home() {
             transition={{ duration: 0.7 }}
           >
             {[
-              { icon: Linkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/company/law-offices-of-john-eluwa-pllc' },
-              { icon: Facebook, label: 'Facebook', url: 'https://www.facebook.com/lawofficesofjohneluwa/' },
+              { icon: Users, label: 'LinkedIn', url: 'https://www.linkedin.com/company/law-offices-of-john-eluwa-pllc' },
+              { icon: MessageCircle, label: 'Facebook', url: 'https://www.facebook.com/lawofficesofjohneluwa/' },
               { icon: Mail, label: 'Email', url: 'mailto:info@johneluwa.com' }
             ].map((social, i) => (
               <motion.a key={i} href={social.url} target="_blank" rel="noopener noreferrer" className="text-center cursor-pointer block" whileHover={{ y: -4, scale: 1.1 }}>
