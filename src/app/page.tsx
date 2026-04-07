@@ -517,7 +517,7 @@ export default function Home() {
                   <p className="text-xs opacity-60 mb-2 font-semibold">{blog.date}</p>
                   <h3 className="font-bold mb-3 line-clamp-2 text-lg" style={{ color: 'var(--green-primary)' }}>{blog.title}</h3>
                   <p className="text-sm opacity-85 mb-5 leading-relaxed">{blog.excerpt}</p>
-                  <motion.a href="#" className="text-sm font-semibold flex items-center gap-2 inline-block px-4 py-2 rounded-full" style={{ backgroundColor: 'var(--green-primary)', color: 'white' }} whileHover={{ y: -2, boxShadow: '0 10px 25px rgba(27, 77, 62, 0.3)' }} whileTap={{ y: 0 }}>
+                  <motion.a href="#" className="text-sm font-semibold flex items-center justify-center gap-2 inline-flex px-3 py-1.5 rounded-full" style={{ backgroundColor: 'var(--green-primary)', color: 'white' }} whileHover={{ y: -2, boxShadow: '0 10px 25px rgba(27, 77, 62, 0.3)' }} whileTap={{ y: 0 }}>
                     Read Full Article <ChevronRight size={16} />
                   </motion.a>
                 </div>
