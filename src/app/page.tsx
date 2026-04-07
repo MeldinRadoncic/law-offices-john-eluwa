@@ -57,7 +57,7 @@ export default function Home() {
           {/* CTA Button */}
           <button
             className="hidden md:block px-6 py-2.5 text-white font-medium text-sm rounded-full hover:shadow-lg transform hover:-translate-y-0.5"
-            style={{ backgroundColor: 'var(--gold-accent)', color: 'white' }}
+            style={{ backgroundColor: 'var(--green-primary)' }}
           >
             Free Consultation
           </button>
@@ -78,7 +78,7 @@ export default function Home() {
               <a href="#contact" className="block text-sm font-medium hover:opacity-60">Contact</a>
               <button
                 className="w-full py-3 text-white font-medium rounded-full text-sm"
-                style={{ backgroundColor: 'var(--gold-accent)' }}
+                style={{ backgroundColor: 'var(--green-primary)' }}
               >
                 Free Consultation
               </button>
@@ -126,13 +126,13 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button
                 className="px-8 py-4 text-white font-semibold rounded-full hover:shadow-xl transform hover:-translate-y-1 text-center"
-                style={{ backgroundColor: 'var(--gold-accent)' }}
+                style={{ backgroundColor: 'var(--green-primary)' }}
               >
                 Schedule Free Consultation
               </button>
               <button
                 className="px-8 py-4 font-semibold rounded-full border-2 hover:opacity-70 flex items-center justify-center gap-2"
-                style={{ borderColor: 'var(--green-primary)', color: 'var(--green-primary)' }}
+                style={{ borderColor: 'var(--gold-accent)', color: 'var(--gold-accent)' }}
               >
                 Call Now <ChevronRight size={18} />
               </button>
@@ -375,8 +375,8 @@ export default function Home() {
             </div>
 
             <button
-              className="px-6 py-3 font-semibold rounded-full text-white"
-              style={{ backgroundColor: 'var(--gold-accent)' }}
+              className="px-6 py-3 font-semibold rounded-full text-white hover:shadow-lg transform hover:-translate-y-1"
+              style={{ backgroundColor: 'var(--green-primary)' }}
             >
               View Full Biography
             </button>
@@ -456,8 +456,8 @@ export default function Home() {
           {/* Dual CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              className="px-8 py-4 font-semibold rounded-full text-green-900 hover:shadow-lg transform hover:-translate-y-1"
-              style={{ backgroundColor: 'white' }}
+              className="px-8 py-4 font-semibold rounded-full text-white hover:shadow-lg transform hover:-translate-y-1"
+              style={{ backgroundColor: 'var(--gold-accent)' }}
             >
               Book Online Now
             </button>
