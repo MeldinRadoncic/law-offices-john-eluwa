@@ -170,11 +170,11 @@ export default function Home() {
             ></div>
 
             {/* Main image container */}
-            <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl" style={{ zIndex: 1 }}>
+            <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl" style={{ zIndex: 1, backgroundColor: 'white' }}>
               <img
-                src="https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?w=600&h=600&fit=crop"
-                alt="Professional attorney John Eluwa"
-                className="w-full h-full object-cover"
+                src="https://images.avvo.com/avvo/ugc/images/head_shot/standard/lawyer_john_eluwa_1731229_1522964011.jpg"
+                alt="John Eluwa, Attorney at Law"
+                className="w-full h-full object-cover object-center"
               />
             </div>
           </div>
