@@ -692,8 +692,14 @@ export default function Home() {
               { icon: MessageCircle, label: 'Facebook', url: 'https://www.facebook.com/lawofficesofjohneluwa/' },
               { icon: Mail, label: 'Email', url: 'mailto:info@johneluwa.com' }
             ].map((social, i) => (
-              <motion.a key={i} href={social.url} target="_blank" rel="noopener noreferrer" className="text-center cursor-pointer block" whileHover={{ y: -4, scale: 1.1 }}>
-                <social.icon size={40} className="mx-auto mb-3" style={{ color: 'var(--gold-accent)' }} />
+              <motion.a key={i} href={social.url} target="_blank" rel="noopener noreferrer" className="text-center cursor-pointer block" whileHover={{ y: -4 }}>
+                <motion.div
+                  className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center shadow-lg"
+                  style={{ backgroundColor: 'var(--gold-accent)' }}
+                  whileHover={{ scale: 1.15 }}
+                >
+                  <social.icon size={32} style={{ color: 'white' }} />
+                </motion.div>
                 <p className="font-semibold text-sm" style={{ color: 'var(--green-primary)' }}>{social.label}</p>
               </motion.a>
             ))}
