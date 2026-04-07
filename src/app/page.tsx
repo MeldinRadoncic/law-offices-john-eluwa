@@ -750,6 +750,9 @@ export default function Home() {
         <div className="text-center text-xs opacity-75 space-y-2">
           <p>&copy; 2024 Law Offices of John Eluwa, PLLC. All rights reserved.</p>
           <p>This website is for informational purposes only. Not a substitute for legal advice. Prior results do not guarantee outcomes.</p>
+          <p className="pt-2 border-t" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+            Powered by <a href="https://appwizardpro.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition font-semibold">App Wizard</a>
+          </p>
         </div>
       </footer>
     </div>
