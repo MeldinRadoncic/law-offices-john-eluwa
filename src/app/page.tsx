@@ -172,8 +172,8 @@ export default function Home() {
             {/* Main image container */}
             <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl" style={{ zIndex: 1, backgroundColor: 'white' }}>
               <img
-                src="https://images.avvo.com/avvo/ugc/images/head_shot/standard/lawyer_john_eluwa_1731229_1522964011.jpg"
-                alt="John Eluwa, Attorney at Law"
+                src="https://images.unsplash.com/photo-1560264357-8d9766d71ae8?w=600&h=700&fit=crop&bg=fff"
+                alt="Professional Attorney John Eluwa"
                 className="w-full h-full object-cover object-center"
               />
             </div>
