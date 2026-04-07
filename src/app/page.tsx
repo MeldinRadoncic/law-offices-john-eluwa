@@ -248,10 +248,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="mb-20"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+            transition={{ duration: 0.7 }}
           >
             <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
               Practice Areas
@@ -298,10 +298,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-16"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+            transition={{ duration: 0.7 }}
           >
             <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
               Why Choose Us
@@ -342,7 +342,7 @@ export default function Home() {
             className="hidden md:block relative h-96"
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
             transition={{ duration: 0.8 }}
           >
             <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl">
@@ -358,7 +358,7 @@ export default function Home() {
             className="space-y-8"
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
             transition={{ duration: 0.8 }}
           >
             <div>
@@ -406,10 +406,10 @@ export default function Home() {
             ].map((stat, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
+                initial={{ opacity: 0, scale: 0.5, y: 40 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: '0px 0px -80px 0px' }}
+                transition={{ duration: 0.7, delay: i * 0.15 }}
               >
                 <div className="serif-display text-5xl font-bold mb-2" style={{ color: 'var(--gold-accent)' }}>
                   {stat.num}+
@@ -426,9 +426,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="mb-16"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+            transition={{ duration: 0.7 }}
           >
             <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
               What Clients Say
@@ -476,9 +477,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="mb-16"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+            transition={{ duration: 0.7 }}
           >
             <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
               Latest Insights
@@ -488,30 +490,36 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { date: 'Mar 15, 2024', title: 'Guide to Family-Based Immigration', excerpt: 'Learn the steps to sponsoring family members for permanent residence.' },
-              { date: 'Mar 10, 2024', title: 'Understanding Deportation Defense', excerpt: 'What to do if you\'re facing removal proceedings.' },
-              { date: 'Mar 5, 2024', title: 'Green Card FAQ', excerpt: 'Common questions about obtaining and renewing your green card.' }
+              { date: 'Apr 5, 2024', title: 'Guide to Family-Based Immigration', excerpt: 'Learn the step-by-step process to sponsor family members for permanent residence and US citizenship.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&h=300&fit=crop' },
+              { date: 'Apr 2, 2024', title: 'Understanding Deportation Defense', excerpt: 'What to do if you\'re facing removal proceedings and how to protect your rights immediately.', image: 'https://images.unsplash.com/photo-1450101499163-c8917c7b0efc?w=500&h=300&fit=crop' },
+              { date: 'Mar 28, 2024', title: 'Green Card FAQ', excerpt: 'Common questions about obtaining, renewing, and maintaining your precious green card status.', image: 'https://images.unsplash.com/photo-1460661326149-fc4ac5922d06?w=500&h=300&fit=crop' }
             ].map((blog, i) => (
               <motion.div
                 key={i}
-                className="rounded-lg overflow-hidden border hover:shadow-lg"
+                className="rounded-lg overflow-hidden border hover:shadow-xl"
                 style={{ borderColor: 'var(--light-border)' }}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                whileHover={{ y: -4 }}
+                viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+                transition={{ duration: 0.7, delay: i * 0.15 }}
+                whileHover={{ y: -8, shadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}
               >
-                <div className="h-48 bg-gradient-to-br from-stone-200 to-stone-300 flex items-center justify-center">
-                  <BookOpen size={48} style={{ color: 'var(--green-primary)' }} />
+                <div className="h-48 overflow-hidden bg-stone-200 relative group">
+                  <motion.img
+                    src={blog.image}
+                    alt={blog.title}
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.4 }}
+                  />
                 </div>
                 <div className="p-6">
-                  <p className="text-xs opacity-60 mb-2">{blog.date}</p>
-                  <h3 className="font-bold mb-3 line-clamp-2" style={{ color: 'var(--green-primary)' }}>{blog.title}</h3>
-                  <p className="text-sm opacity-85 mb-4">{blog.excerpt}</p>
-                  <a href="#" className="text-sm font-semibold flex items-center gap-2" style={{ color: 'var(--gold-accent)' }}>
-                    Read More <ChevronRight size={16} />
-                  </a>
+                  <p className="text-xs opacity-60 mb-2 font-semibold">{blog.date}</p>
+                  <h3 className="font-bold mb-3 line-clamp-2 text-lg" style={{ color: 'var(--green-primary)' }}>{blog.title}</h3>
+                  <p className="text-sm opacity-85 mb-5 leading-relaxed">{blog.excerpt}</p>
+                  <motion.a href="#" className="text-sm font-semibold flex items-center gap-2 inline-block" style={{ color: 'var(--gold-accent)' }} whileHover={{ x: 4 }}>
+                    Read Full Article <ChevronRight size={16} />
+                  </motion.a>
                 </div>
               </motion.div>
             ))}
@@ -524,9 +532,10 @@ export default function Home() {
         <div className="max-w-3xl mx-auto">
           <motion.div
             className="text-center mb-16"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+            transition={{ duration: 0.7 }}
           >
             <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
               Frequently Asked Questions
@@ -566,10 +575,10 @@ export default function Home() {
         <div className="max-w-5xl mx-auto text-center space-y-12 text-white">
           <motion.div
             className="space-y-4"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+            transition={{ duration: 0.7 }}
           >
             <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }}>
               <Calendar size={56} className="mx-auto" style={{ color: 'var(--gold-accent)' }} />
@@ -611,9 +620,10 @@ export default function Home() {
         <div className="max-w-2xl mx-auto">
           <motion.div
             className="text-center mb-12"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+            transition={{ duration: 0.7 }}
           >
             <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
               Get in Touch
@@ -623,10 +633,10 @@ export default function Home() {
 
           <motion.form
             className="space-y-4"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: '0px 0px -80px 0px' }}
+            transition={{ duration: 0.7 }}
           >
             {['Name', 'Email', 'Phone'].map((field, i) => (
               <motion.div
@@ -672,9 +682,10 @@ export default function Home() {
 
           <motion.div
             className="mt-12 grid md:grid-cols-3 gap-6"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '0px 0px -80px 0px' }}
+            transition={{ duration: 0.7 }}
           >
             {[
               { icon: MapPin, label: 'Raleigh, NC', value: 'Downtown Legal District' },
