@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Crimson_Text, Outfit } from 'next/font/google';
 import { motion } from 'motion/react';
 import { Menu, X, Calendar, Shield, Scale, Users, Award, MapPin, Phone, Mail, ChevronRight, Star, BookOpen, MessageCircle, Zap, Heart, Target } from 'lucide-react';
+import { FaFacebook, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 const crimson = Crimson_Text({
   subsets: ['latin'],
@@ -688,17 +689,13 @@ export default function Home() {
             transition={{ duration: 0.7 }}
           >
             {[
-              { icon: Users, label: 'LinkedIn', url: 'https://www.linkedin.com/company/law-offices-of-john-eluwa-pllc' },
-              { icon: MessageCircle, label: 'Facebook', url: 'https://www.facebook.com/lawofficesofjohneluwa/' },
-              { icon: Mail, label: 'Email', url: 'mailto:info@johneluwa.com' }
+              { icon: FaLinkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/company/law-offices-of-john-eluwa-pllc' },
+              { icon: FaFacebook, label: 'Facebook', url: 'https://www.facebook.com/lawofficesofjohneluwa/' },
+              { icon: FaEnvelope, label: 'Email', url: 'mailto:info@johneluwa.com' }
             ].map((social, i) => (
               <motion.a key={i} href={social.url} target="_blank" rel="noopener noreferrer" className="text-center cursor-pointer block" whileHover={{ y: -4 }}>
-                <motion.div
-                  className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center shadow-lg"
-                  style={{ backgroundColor: 'var(--gold-accent)' }}
-                  whileHover={{ scale: 1.15 }}
-                >
-                  <social.icon size={32} style={{ color: 'white' }} />
+                <motion.div whileHover={{ scale: 1.15 }} className="mb-4">
+                  <social.icon size={48} className="mx-auto" />
                 </motion.div>
                 <p className="font-semibold text-sm" style={{ color: 'var(--green-primary)' }}>{social.label}</p>
               </motion.a>
