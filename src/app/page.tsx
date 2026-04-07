@@ -293,48 +293,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us - NEW */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
-            transition={{ duration: 0.7 }}
-          >
-            <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
-              Why Choose Us
-            </h2>
-            <p className="text-lg opacity-75">Our commitment to your success</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { icon: Zap, title: 'Experience', desc: '25+ years of proven legal expertise' },
-              { icon: Heart, title: 'Compassion', desc: 'We care about you as a person' },
-              { icon: Target, title: 'Results', desc: '98% success rate across all cases' },
-              { icon: Users, title: 'Accessible', desc: 'Bilingual (English & Spanish) support' }
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                className="text-center p-6"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-              >
-                <motion.div whileHover={{ scale: 1.1 }} className="mb-4">
-                  <item.icon size={48} className="mx-auto" style={{ color: 'var(--gold-accent)' }} />
-                </motion.div>
-                <h3 className="font-semibold mb-2" style={{ color: 'var(--green-primary)' }}>{item.title}</h3>
-                <p className="text-sm opacity-85">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Attorney Spotlight - Enhanced */}
       <section id="about" className="py-24 px-6 border-b" style={{ borderColor: 'var(--light-border)' }}>
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
@@ -391,6 +349,48 @@ export default function Home() {
               Schedule a Meeting
             </motion.button>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Why Choose Us - NEW */}
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+            transition={{ duration: 0.7 }}
+          >
+            <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
+              Why Choose Us
+            </h2>
+            <p className="text-lg opacity-75">Our commitment to your success</p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { icon: Zap, title: 'Experience', desc: '25+ years of proven legal expertise' },
+              { icon: Heart, title: 'Compassion', desc: 'We care about you as a person' },
+              { icon: Target, title: 'Results', desc: '98% success rate across all cases' },
+              { icon: Users, title: 'Accessible', desc: 'Bilingual (English & Spanish) support' }
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                className="text-center p-6"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+              >
+                <motion.div whileHover={{ scale: 1.1 }} className="mb-4">
+                  <item.icon size={48} className="mx-auto" style={{ color: 'var(--gold-accent)' }} />
+                </motion.div>
+                <h3 className="font-semibold mb-2" style={{ color: 'var(--green-primary)' }}>{item.title}</h3>
+                <p className="text-sm opacity-85">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
