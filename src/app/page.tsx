@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Crimson_Text, Outfit } from 'next/font/google';
 import { motion } from 'motion/react';
-import { Menu, X, Calendar, Shield, Scale, Users, Award, MapPin, Phone, Mail, ChevronRight, Star, BookOpen, MessageCircle, Zap, Heart, Target } from 'lucide-react';
+import { Menu, X, Calendar, Shield, Scale, Users, Award, MapPin, Phone, Mail, ChevronRight, Star, BookOpen, MessageCircle, Zap, Heart, Target, Linkedin, Facebook } from 'lucide-react';
 
 const crimson = Crimson_Text({
   subsets: ['latin'],
@@ -688,15 +688,14 @@ export default function Home() {
             transition={{ duration: 0.7 }}
           >
             {[
-              { icon: MapPin, label: 'Raleigh, NC', value: 'Downtown Legal District' },
-              { icon: Phone, label: 'Phone', value: '(919) 555-0123' },
-              { icon: Mail, label: 'Email', value: 'info@johneluwa.com' }
-            ].map((contact, i) => (
-              <motion.div key={i} className="text-center" whileHover={{ y: -4 }}>
-                <contact.icon size={32} className="mx-auto mb-3" style={{ color: 'var(--gold-accent)' }} />
-                <p className="font-semibold text-sm" style={{ color: 'var(--green-primary)' }}>{contact.label}</p>
-                <p className="text-sm opacity-85">{contact.value}</p>
-              </motion.div>
+              { icon: Linkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/company/law-offices-of-john-eluwa-pllc' },
+              { icon: Facebook, label: 'Facebook', url: 'https://www.facebook.com/lawofficesofjohneluwa/' },
+              { icon: Mail, label: 'Email', url: 'mailto:info@johneluwa.com' }
+            ].map((social, i) => (
+              <motion.a key={i} href={social.url} target="_blank" rel="noopener noreferrer" className="text-center cursor-pointer block" whileHover={{ y: -4, scale: 1.1 }}>
+                <social.icon size={40} className="mx-auto mb-3" style={{ color: 'var(--gold-accent)' }} />
+                <p className="font-semibold text-sm" style={{ color: 'var(--green-primary)' }}>{social.label}</p>
+              </motion.a>
             ))}
           </motion.div>
         </div>
