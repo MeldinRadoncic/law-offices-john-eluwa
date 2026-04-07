@@ -157,18 +157,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right: Hero Image (Asymmetric - overlapping design) */}
+          {/* Right: Hero Image */}
           <div className="hidden md:block relative h-96 md:h-full">
-            {/* Decorative element behind image */}
-            <div
-              className="absolute inset-0 rounded-3xl"
-              style={{
-                backgroundColor: 'var(--green-primary)',
-                transform: 'translate(20px, 20px)',
-                zIndex: 0
-              }}
-            ></div>
-
             {/* Main image container */}
             <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl" style={{ zIndex: 1, backgroundColor: 'white' }}>
               <img
@@ -328,17 +318,9 @@ export default function Home() {
       {/* Attorney Spotlight - Asymmetric Layout */}
       <section id="about" className="py-24 px-6 border-b" style={{ borderColor: 'var(--light-border)' }}>
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-          {/* Image - Left, Overlapping Design */}
+          {/* Image - Left */}
           <div className="hidden md:block relative h-96">
-            <div
-              className="absolute inset-0 rounded-2xl"
-              style={{
-                backgroundColor: 'var(--gold-accent)',
-                transform: 'translate(-20px, -20px)',
-                zIndex: 0
-              }}
-            ></div>
-            <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl" style={{ zIndex: 1 }}>
+            <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl">
               <img
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop"
                 alt="John Eluwa, Attorney at Law"
