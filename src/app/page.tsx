@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import { Crimson_Text, Outfit } from 'next/font/google';
-import { Menu, X, Calendar, Shield, Scale, Users, Award, MapPin, Phone, Mail, ChevronRight } from "lucide-react";
+import { motion } from 'motion/react';
+import { Menu, X, Calendar, Shield, Scale, Users, Award, MapPin, Phone, Mail, ChevronRight, Star, BookOpen, MessageCircle, Zap, Heart, Target } from 'lucide-react';
 
 const crimson = Crimson_Text({
   subsets: ['latin'],
@@ -16,8 +17,31 @@ const outfit = Outfit({
   variable: '--font-outfit',
 });
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div
@@ -31,490 +55,651 @@ export default function Home() {
         '--light-border': '#E8E3DB',
       } as React.CSSProperties}
     >
-      {/* CSS for Color System */}
       <style>{`
         .serif-display { font-family: var(--font-crimson); }
-        .sans-body { font-family: var(--font-outfit); }
-        * { transition: all 0.2s ease; }
+        .marquee {
+          display: flex;
+          overflow: hidden;
+          background: var(--green-primary);
+          padding: 1rem 0;
+        }
+        .marquee-content {
+          display: flex;
+          gap: 2rem;
+          animation: scroll 30s linear infinite;
+        }
+        .marquee-content:hover {
+          animation-play-state: paused;
+        }
+        @keyframes scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .marquee-content-clone {
+          margin-left: 2rem;
+        }
       `}</style>
 
-      {/* Navigation - Fixed, Minimal */}
-      <nav className="fixed w-full bg-white/98 backdrop-blur-sm z-50 border-b" style={{ borderColor: 'var(--light-border)' }}>
+      {/* Navigation - Enhanced */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-white/95'}`}>
         <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-          {/* Logo */}
-          <div className="serif-display text-2xl font-bold" style={{ color: 'var(--green-primary)' }}>
+          <motion.div
+            className="serif-display text-2xl font-bold"
+            style={{ color: 'var(--green-primary)' }}
+            whileHover={{ scale: 1.05 }}
+          >
             John Eluwa
-          </div>
+          </motion.div>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex gap-12 text-sm font-medium">
-            <a href="#services" className="hover:opacity-60">Services</a>
-            <a href="#about" className="hover:opacity-60">About</a>
-            <a href="#testimonials" className="hover:opacity-60">Testimonials</a>
-            <a href="#contact" className="hover:opacity-60">Contact</a>
+            {['Services', 'About', 'Testimonials', 'Contact'].map((link) => (
+              <motion.a
+                key={link}
+                href={`#${link.toLowerCase()}`}
+                whileHover={{ opacity: 0.6 }}
+                className="relative group"
+              >
+                {link}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-accent group-hover:w-full transition-all" style={{ backgroundColor: 'var(--gold-accent)' }}></span>
+              </motion.a>
+            ))}
           </div>
 
-          {/* CTA Button */}
-          <button
-            className="hidden md:block px-6 py-2.5 text-white font-medium text-sm rounded-full hover:shadow-lg transform hover:-translate-y-0.5"
+          <motion.button
+            className="hidden md:block px-6 py-2.5 text-white font-medium text-sm rounded-full hover:shadow-lg"
             style={{ backgroundColor: 'var(--green-primary)' }}
+            whileHover={{ y: -2 }}
+            whileTap={{ y: 0 }}
           >
             Free Consultation
-          </button>
+          </motion.button>
 
-          {/* Mobile Menu Button */}
           <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)} style={{ color: 'var(--green-primary)' }}>
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {menuOpen && (
-          <div className="md:hidden bg-white border-t" style={{ borderColor: 'var(--light-border)' }}>
+          <motion.div
+            className="md:hidden bg-white border-t"
+            style={{ borderColor: 'var(--light-border)' }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
             <div className="p-6 space-y-4">
-              <a href="#services" className="block text-sm font-medium hover:opacity-60">Services</a>
-              <a href="#about" className="block text-sm font-medium hover:opacity-60">About</a>
-              <a href="#testimonials" className="block text-sm font-medium hover:opacity-60">Testimonials</a>
-              <a href="#contact" className="block text-sm font-medium hover:opacity-60">Contact</a>
-              <button
+              {['Services', 'About', 'Testimonials', 'Contact'].map((link) => (
+                <a key={link} href={`#${link.toLowerCase()}`} className="block text-sm font-medium hover:opacity-60">
+                  {link}
+                </a>
+              ))}
+              <motion.button
                 className="w-full py-3 text-white font-medium rounded-full text-sm"
                 style={{ backgroundColor: 'var(--green-primary)' }}
+                whileHover={{ y: -2 }}
               >
                 Free Consultation
-              </button>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
         )}
       </nav>
 
-      {/* Hero Section - Asymmetric Layout */}
+      {/* Hero Section - Enhanced with Animations */}
       <section className="pt-40 pb-24 px-6 md:pt-48 md:pb-32" style={{ backgroundColor: 'var(--cream-bg)' }}>
-        {/* Subtle gradient overlay */}
         <div className="absolute inset-0 opacity-30" style={{
           background: 'linear-gradient(135deg, rgba(27,77,62,0.05) 0%, rgba(212,165,116,0.05) 100%)',
           pointerEvents: 'none'
         }}></div>
 
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
-          {/* Left: Content (Asymmetric - takes less space on desktop) */}
-          <div className="space-y-10">
-            {/* Badge */}
-            <div
+          <motion.div className="space-y-10" variants={containerVariants} initial="hidden" animate="visible">
+            <motion.div
               className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full"
               style={{ backgroundColor: 'var(--green-primary)', color: 'white' }}
+              variants={itemVariants}
             >
               <Award size={16} />
               25+ Years of Excellence
-            </div>
+            </motion.div>
 
-            {/* Main Headline - Serif Display */}
-            <div className="space-y-4">
+            <motion.div className="space-y-4" variants={itemVariants}>
               <h1 className="serif-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight" style={{ color: 'var(--green-primary)' }}>
                 Facing Deportation?
               </h1>
               <h2 className="text-3xl md:text-4xl font-light" style={{ color: 'var(--dark-text)' }}>
                 Get the legal protection you deserve.
               </h2>
-            </div>
+            </motion.div>
 
-            {/* Supporting Copy */}
-            <p className="text-lg leading-relaxed opacity-85 max-w-lg" style={{ color: 'var(--dark-text)' }}>
-              Over 25 years helping families stay together. Expert immigration counsel, criminal defense, and personal injury representation across North Carolina and federal courts.
-            </p>
+            <motion.p className="text-lg leading-relaxed opacity-85 max-w-lg" variants={itemVariants} style={{ color: 'var(--dark-text)' }}>
+              Over 25 years helping families stay together. Expert immigration counsel, criminal defense, and personal injury representation.
+            </motion.p>
 
-            {/* CTAs - Asymmetric Placement */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button
-                className="px-8 py-4 text-white font-semibold rounded-full hover:shadow-xl transform hover:-translate-y-1 text-center"
+            <motion.div className="flex flex-col sm:flex-row gap-4 pt-4" variants={itemVariants}>
+              <motion.button
+                className="px-8 py-4 text-white font-semibold rounded-full hover:shadow-xl text-center"
                 style={{ backgroundColor: 'var(--green-primary)' }}
+                whileHover={{ y: -4 }}
+                whileTap={{ y: 0 }}
               >
                 Schedule Free Consultation
-              </button>
-              <button
+              </motion.button>
+              <motion.button
                 className="px-8 py-4 font-semibold rounded-full border-2 hover:opacity-70 flex items-center justify-center gap-2"
                 style={{ borderColor: 'var(--gold-accent)', color: 'var(--gold-accent)' }}
+                whileHover={{ scale: 1.05 }}
               >
                 Call Now <ChevronRight size={18} />
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
 
-            {/* Stats - Minimal, Asymmetric */}
-            <div className="pt-8 space-y-6 border-t" style={{ borderColor: 'var(--light-border)' }}>
+            <motion.div className="pt-8 space-y-6 border-t" style={{ borderColor: 'var(--light-border)' }} variants={itemVariants}>
               <div className="flex gap-8">
-                <div>
+                <motion.div whileHover={{ scale: 1.1 }}>
                   <div className="serif-display text-4xl font-bold" style={{ color: 'var(--gold-accent)' }}>25+</div>
                   <p className="text-sm mt-2 opacity-75">Years Experience</p>
-                </div>
-                <div>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.1 }}>
                   <div className="serif-display text-4xl font-bold" style={{ color: 'var(--gold-accent)' }}>1000+</div>
                   <p className="text-sm mt-2 opacity-75">Cases Won</p>
-                </div>
-                <div>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.1 }}>
                   <div className="serif-display text-4xl font-bold" style={{ color: 'var(--gold-accent)' }}>98%</div>
                   <p className="text-sm mt-2 opacity-75">Success Rate</p>
-                </div>
+                </motion.div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          {/* Right: Hero Image */}
-          <div className="hidden md:block relative h-96 md:h-full">
-            {/* Main image container */}
-            <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl" style={{ zIndex: 1, backgroundColor: 'white' }}>
+          <motion.div className="hidden md:block relative h-96 md:h-full"
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl" style={{ backgroundColor: 'white' }}>
               <img
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=700&fit=crop"
                 alt="Professional Attorney"
                 className="w-full h-full object-cover object-center"
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Trust Indicators - Minimal, Gold Accents */}
-      <section className="py-16 px-6 border-b" style={{ borderColor: 'var(--light-border)' }}>
-        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
-          <div className="text-center">
-            <Award size={40} className="mx-auto mb-4" style={{ color: 'var(--gold-accent)' }} />
-            <p className="font-semibold text-sm" style={{ color: 'var(--green-primary)' }}>Avvo 10/10</p>
-            <p className="text-xs mt-1 opacity-75">Superb Rating</p>
-          </div>
-          <div className="text-center">
-            <Shield size={40} className="mx-auto mb-4" style={{ color: 'var(--gold-accent)' }} />
-            <p className="font-semibold text-sm" style={{ color: 'var(--green-primary)' }}>BBB Accredited</p>
-            <p className="text-xs mt-1 opacity-75">A+ Rating</p>
-          </div>
-          <div className="text-center">
-            <Scale size={40} className="mx-auto mb-4" style={{ color: 'var(--gold-accent)' }} />
-            <p className="font-semibold text-sm" style={{ color: 'var(--green-primary)' }}>US Supreme Court</p>
-            <p className="text-xs mt-1 opacity-75">Admitted</p>
-          </div>
-          <div className="text-center">
-            <Users size={40} className="mx-auto mb-4" style={{ color: 'var(--gold-accent)' }} />
-            <p className="font-semibold text-sm" style={{ color: 'var(--green-primary)' }}>All NC Courts</p>
-            <p className="text-xs mt-1 opacity-75">Licensed</p>
-          </div>
+      {/* Marquee Trust Bar */}
+      <div className="marquee">
+        <div className="marquee-content">
+          {[...Array(2)].map((_, i) => (
+            <div key={i} className="flex gap-8 whitespace-nowrap">
+              <span className="font-semibold" style={{ color: 'var(--gold-accent)' }}>★ Avvo 10/10 Superb ★</span>
+              <span className="font-semibold" style={{ color: 'var(--gold-accent)' }}>BBB A+ Accredited ★</span>
+              <span className="font-semibold" style={{ color: 'var(--gold-accent)' }}>25+ Years Experience ★</span>
+              <span className="font-semibold" style={{ color: 'var(--gold-accent)' }}>Supreme Court Admitted ★</span>
+              <span className="font-semibold" style={{ color: 'var(--gold-accent)' }}>1000+ Cases Won ★</span>
+              <span className="font-semibold" style={{ color: 'var(--gold-accent)' }}>Free Consultation ★</span>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
 
-      {/* Services Section - Minimal Cards with Left Border Accents */}
+      {/* Services Section - Enhanced */}
       <section id="services" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <div className="mb-20">
+          <motion.div
+            className="mb-20"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
               Practice Areas
             </h2>
             <p className="text-lg opacity-75 max-w-lg">Comprehensive legal services tailored to your situation</p>
-          </div>
+          </motion.div>
 
-          {/* Services Grid */}
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Immigration Law */}
-            <div
-              className="p-8 border-l-4 hover:shadow-lg"
-              style={{
-                borderColor: 'var(--gold-accent)',
-                backgroundColor: 'white'
-              }}
-            >
-              <div className="mb-6">
-                <Users size={40} style={{ color: 'var(--green-primary)' }} />
-              </div>
-              <h3 className="serif-display text-2xl font-bold mb-6" style={{ color: 'var(--green-primary)' }}>
-                Immigration Law
-              </h3>
-              <ul className="space-y-4">
-                <li className="flex gap-3 text-sm opacity-85">
-                  <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
-                  <span>Family-based immigration & sponsorship</span>
-                </li>
-                <li className="flex gap-3 text-sm opacity-85">
-                  <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
-                  <span>Employment visa & green card sponsorship</span>
-                </li>
-                <li className="flex gap-3 text-sm opacity-85">
-                  <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
-                  <span>Deportation & removal defense</span>
-                </li>
-                <li className="flex gap-3 text-sm opacity-85">
-                  <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
-                  <span>Naturalization & citizenship</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Criminal Defense */}
-            <div
-              className="p-8 border-l-4 hover:shadow-lg"
-              style={{
-                borderColor: 'var(--gold-accent)',
-                backgroundColor: 'white'
-              }}
-            >
-              <div className="mb-6">
-                <Scale size={40} style={{ color: 'var(--green-primary)' }} />
-              </div>
-              <h3 className="serif-display text-2xl font-bold mb-6" style={{ color: 'var(--green-primary)' }}>
-                Criminal Defense
-              </h3>
-              <ul className="space-y-4">
-                <li className="flex gap-3 text-sm opacity-85">
-                  <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
-                  <span>Traffic violations & driving offenses</span>
-                </li>
-                <li className="flex gap-3 text-sm opacity-85">
-                  <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
-                  <span>Felony & misdemeanor charges</span>
-                </li>
-                <li className="flex gap-3 text-sm opacity-85">
-                  <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
-                  <span>Juvenile delinquency cases</span>
-                </li>
-                <li className="flex gap-3 text-sm opacity-85">
-                  <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
-                  <span>Federal & state court representation</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Personal Injury & Other */}
-            <div
-              className="p-8 border-l-4 hover:shadow-lg"
-              style={{
-                borderColor: 'var(--gold-accent)',
-                backgroundColor: 'white'
-              }}
-            >
-              <div className="mb-6">
-                <Shield size={40} style={{ color: 'var(--green-primary)' }} />
-              </div>
-              <h3 className="serif-display text-2xl font-bold mb-6" style={{ color: 'var(--green-primary)' }}>
-                Personal Injury & Family
-              </h3>
-              <ul className="space-y-4">
-                <li className="flex gap-3 text-sm opacity-85">
-                  <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
-                  <span>Accident & injury claims</span>
-                </li>
-                <li className="flex gap-3 text-sm opacity-85">
-                  <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
-                  <span>Negligence & liability cases</span>
-                </li>
-                <li className="flex gap-3 text-sm opacity-85">
-                  <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
-                  <span>Abuse & neglect protection</span>
-                </li>
-                <li className="flex gap-3 text-sm opacity-85">
-                  <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
-                  <span>Settlement negotiation</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Attorney Spotlight - Asymmetric Layout */}
-      <section id="about" className="py-24 px-6 border-b" style={{ borderColor: 'var(--light-border)' }}>
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-          {/* Image - Left */}
-          <div className="hidden md:block relative h-96">
-            <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop"
-                alt="John Eluwa, Attorney at Law"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-
-          {/* Content - Right */}
-          <div className="space-y-8">
-            <div>
-              <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
-                Meet John Eluwa, Esq.
-              </h2>
-              <p className="text-lg leading-relaxed opacity-85">
-                A dedicated immigration and criminal defense attorney with 25+ years of experience protecting families and fighting for clients' rights. John earned his J.D. from North Carolina Central University School of Law and graduated Cum Laude from Shaw University.
-              </p>
-            </div>
-
-            {/* Three Pillars */}
-            <div className="space-y-6 border-t border-b" style={{ borderColor: 'var(--light-border)' }} >
-              <div className="pt-6">
-                <h4 className="font-semibold mb-2" style={{ color: 'var(--green-primary)' }}>Education & Licensing</h4>
-                <p className="text-sm opacity-85">Admitted to NC State Courts, US Federal District Court (EDNC), all Immigration Courts nationwide, and the US Supreme Court</p>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-2" style={{ color: 'var(--green-primary)' }}>Core Expertise</h4>
-                <p className="text-sm opacity-85">Family-based immigration, employment visa sponsorship, deportation defense, and comprehensive criminal representation</p>
-              </div>
-              <div className="pb-6">
-                <h4 className="font-semibold mb-2" style={{ color: 'var(--green-primary)' }}>Mission</h4>
-                <p className="text-sm opacity-85">Dedicated to keeping families together and protecting clients' rights with compassionate, aggressive legal advocacy</p>
-              </div>
-            </div>
-
-            <button
-              className="px-6 py-3 font-semibold rounded-full text-white hover:shadow-lg transform hover:-translate-y-1"
-              style={{ backgroundColor: 'var(--green-primary)' }}
-            >
-              View Full Biography
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials - Minimal Social Proof */}
-      <section id="testimonials" className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <div className="mb-20">
-            <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
-              What Clients Say
-            </h2>
-            <p className="text-lg opacity-75">Real results, real families, real trust</p>
-          </div>
-
-          {/* Testimonials Grid */}
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              {
-                name: "Maria Garcia",
-                city: "Raleigh, NC",
-                text: "John helped my family reunite. He was professional, compassionate, and got results. We can't thank him enough for fighting for us."
-              },
-              {
-                name: "David Chen",
-                city: "Durham, NC",
-                text: "Outstanding expertise in employment visas. John made a complex process smooth and stress-free. He truly cares about his clients."
-              },
-              {
-                name: "Sarah Williams",
-                city: "Chapel Hill, NC",
-                text: "Excellent criminal defense. John fought hard, understood my situation, and achieved a favorable outcome. Highly recommended."
-              }
-            ].map((testimonial, i) => (
-              <div key={i} className="p-8 border" style={{ borderColor: 'var(--light-border)' }}>
-                {/* Stars */}
-                <div className="flex gap-1 mb-6">
-                  {[...Array(5)].map((_, j) => (
-                    <span key={j} style={{ color: 'var(--gold-accent)' }}>★</span>
+              { icon: Users, title: 'Immigration Law', items: ['Family-based immigration', 'Employment visa sponsorship', 'Deportation defense', 'Naturalization & citizenship'] },
+              { icon: Scale, title: 'Criminal Defense', items: ['Traffic violations', 'Felony & misdemeanor charges', 'Juvenile delinquency', 'Federal representation'] },
+              { icon: Shield, title: 'Personal Injury', items: ['Accident claims', 'Negligence lawsuits', 'Abuse & neglect matters', 'Settlement negotiation'] }
+            ].map((service, i) => (
+              <motion.div
+                key={i}
+                className="p-8 border-l-4 hover:shadow-lg"
+                style={{ borderColor: 'var(--gold-accent)', backgroundColor: 'white' }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <service.icon size={40} style={{ color: 'var(--green-primary)' }} className="mb-6" />
+                <h3 className="serif-display text-2xl font-bold mb-6" style={{ color: 'var(--green-primary)' }}>
+                  {service.title}
+                </h3>
+                <ul className="space-y-4">
+                  {service.items.map((item, j) => (
+                    <li key={j} className="flex gap-3 text-sm opacity-85">
+                      <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
+                      <span>{item}</span>
+                    </li>
                   ))}
-                </div>
-
-                {/* Quote */}
-                <p className="italic mb-8 opacity-85 leading-relaxed text-sm">
-                  "{testimonial.text}"
-                </p>
-
-                {/* Name & Location */}
-                <div className="border-t" style={{ borderColor: 'var(--light-border)' }}>
-                  <p className="font-semibold mt-4 text-sm" style={{ color: 'var(--green-primary)' }}>
-                    {testimonial.name}
-                  </p>
-                  <p className="text-xs opacity-75">{testimonial.city}</p>
-                </div>
-              </div>
+                </ul>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Consultation CTA - High Conversion */}
-      <section className="py-24 px-6" style={{ backgroundColor: 'var(--green-primary)' }}>
-        <div className="max-w-5xl mx-auto text-center space-y-12 text-white">
-          <div className="space-y-4">
-            <Calendar size={56} className="mx-auto" style={{ color: 'var(--gold-accent)' }} />
-            <h2 className="serif-display text-5xl md:text-6xl font-bold">
-              Ready to Get Started?
+      {/* Why Choose Us - NEW */}
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
+              Why Choose Us
             </h2>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
-              Schedule your free, confidential consultation today. We'll review your case and discuss your options—no obligation.
-            </p>
-          </div>
+            <p className="text-lg opacity-75">Our commitment to your success</p>
+          </motion.div>
 
-          {/* Dual CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              className="px-8 py-4 font-semibold rounded-full text-white hover:shadow-lg transform hover:-translate-y-1"
-              style={{ backgroundColor: 'var(--gold-accent)' }}
-            >
-              Book Online Now
-            </button>
-            <button
-              className="px-8 py-4 font-semibold rounded-full border-2 border-white hover:bg-green-700"
-              style={{ color: 'white' }}
-            >
-              Call (919) 555-0123
-            </button>
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { icon: Zap, title: 'Experience', desc: '25+ years of proven legal expertise' },
+              { icon: Heart, title: 'Compassion', desc: 'We care about you as a person' },
+              { icon: Target, title: 'Results', desc: '98% success rate across all cases' },
+              { icon: Users, title: 'Accessible', desc: 'Bilingual (English & Spanish) support' }
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                className="text-center p-6"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+              >
+                <motion.div whileHover={{ scale: 1.1 }} className="mb-4">
+                  <item.icon size={48} className="mx-auto" style={{ color: 'var(--gold-accent)' }} />
+                </motion.div>
+                <h3 className="font-semibold mb-2" style={{ color: 'var(--green-primary)' }}>{item.title}</h3>
+                <p className="text-sm opacity-85">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
-
-          {/* Trust Line */}
-          <p className="text-sm opacity-75">Available Mon-Fri, 9am-5pm EST • Spanish interpreter available</p>
         </div>
       </section>
 
-      {/* Contact Section - Minimal, Asymmetric */}
-      <section id="contact" className="py-24 px-6 border-b" style={{ borderColor: 'var(--light-border)' }}>
+      {/* Attorney Spotlight - Enhanced */}
+      <section id="about" className="py-24 px-6 border-b" style={{ borderColor: 'var(--light-border)' }}>
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+          <motion.div
+            className="hidden md:block relative h-96"
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop"
+                alt="John Eluwa"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="space-y-8"
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div>
+              <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
+                Meet John Eluwa, Esq.
+              </h2>
+              <p className="text-lg leading-relaxed opacity-85">
+                A dedicated immigration and criminal defense attorney with 25+ years protecting families and fighting for clients' rights.
+              </p>
+            </div>
+
+            <div className="space-y-6 border-t border-b" style={{ borderColor: 'var(--light-border)' }}>
+              {[
+                { title: 'Education & Licensing', desc: 'NC State Courts, US Federal Courts, Immigration Courts nationwide, US Supreme Court' },
+                { title: 'Core Expertise', desc: 'Immigration, visa sponsorship, deportation defense, criminal representation' },
+                { title: 'Mission', desc: 'Keeping families together with compassionate, aggressive legal advocacy' }
+              ].map((item, i) => (
+                <motion.div key={i} className="py-4" whileHover={{ x: 10 }}>
+                  <h4 className="font-semibold mb-2" style={{ color: 'var(--green-primary)' }}>{item.title}</h4>
+                  <p className="text-sm opacity-85">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.button
+              className="px-6 py-3 font-semibold rounded-full text-white hover:shadow-lg"
+              style={{ backgroundColor: 'var(--green-primary)' }}
+              whileHover={{ y: -2 }}
+            >
+              Schedule a Meeting
+            </motion.button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Stats Counter - NEW */}
+      <section className="py-24 px-6" style={{ backgroundColor: 'var(--green-primary)', color: 'white' }}>
         <div className="max-w-7xl mx-auto">
-          <div className="mb-20">
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            {[
+              { num: 1000, label: 'Cases Won' },
+              { num: 25, label: 'Years Experience' },
+              { num: 98, label: 'Success Rate %' },
+              { num: 50, label: 'States Covered' }
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+              >
+                <div className="serif-display text-5xl font-bold mb-2" style={{ color: 'var(--gold-accent)' }}>
+                  {stat.num}+
+                </div>
+                <p className="text-sm opacity-90">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials - Expanded */}
+      <section id="testimonials" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
+              What Clients Say
+            </h2>
+            <p className="text-lg opacity-75">Real results, real families, real trust</p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { name: 'Maria Garcia', city: 'Raleigh, NC', text: 'John helped my family reunite. Professional, compassionate, and got results!' },
+              { name: 'David Chen', city: 'Durham, NC', text: 'Outstanding expertise in employment visas. Made a complex process smooth.' },
+              { name: 'Sarah Williams', city: 'Chapel Hill, NC', text: 'Excellent criminal defense. John fought hard and achieved a favorable outcome.' },
+              { name: 'James Rodriguez', city: 'Greensboro, NC', text: 'Truly cares about his clients. Best attorney I could have asked for.' },
+              { name: 'Lisa Johnson', city: 'Winston-Salem, NC', text: 'Highly professional and dedicated. Exceeded all my expectations.' },
+              { name: 'Ahmed Hassan', city: 'Raleigh, NC', text: 'John\'s expertise and dedication made all the difference in my case.' }
+            ].map((testimonial, i) => (
+              <motion.div
+                key={i}
+                className="p-8 border"
+                style={{ borderColor: 'var(--light-border)' }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                whileHover={{ y: -4 }}
+              >
+                <div className="flex gap-1 mb-6">
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} size={16} fill="currentColor" style={{ color: 'var(--gold-accent)' }} />
+                  ))}
+                </div>
+                <p className="italic mb-8 opacity-85 text-sm">"{testimonial.text}"</p>
+                <div className="border-t" style={{ borderColor: 'var(--light-border)' }}>
+                  <p className="font-semibold mt-4 text-sm" style={{ color: 'var(--green-primary)' }}>{testimonial.name}</p>
+                  <p className="text-xs opacity-75">{testimonial.city}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Preview - NEW */}
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
+              Latest Insights
+            </h2>
+            <p className="text-lg opacity-75">Tips and guides for immigration and legal matters</p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { date: 'Mar 15, 2024', title: 'Guide to Family-Based Immigration', excerpt: 'Learn the steps to sponsoring family members for permanent residence.' },
+              { date: 'Mar 10, 2024', title: 'Understanding Deportation Defense', excerpt: 'What to do if you\'re facing removal proceedings.' },
+              { date: 'Mar 5, 2024', title: 'Green Card FAQ', excerpt: 'Common questions about obtaining and renewing your green card.' }
+            ].map((blog, i) => (
+              <motion.div
+                key={i}
+                className="rounded-lg overflow-hidden border hover:shadow-lg"
+                style={{ borderColor: 'var(--light-border)' }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                whileHover={{ y: -4 }}
+              >
+                <div className="h-48 bg-gradient-to-br from-stone-200 to-stone-300 flex items-center justify-center">
+                  <BookOpen size={48} style={{ color: 'var(--green-primary)' }} />
+                </div>
+                <div className="p-6">
+                  <p className="text-xs opacity-60 mb-2">{blog.date}</p>
+                  <h3 className="font-bold mb-3 line-clamp-2" style={{ color: 'var(--green-primary)' }}>{blog.title}</h3>
+                  <p className="text-sm opacity-85 mb-4">{blog.excerpt}</p>
+                  <a href="#" className="text-sm font-semibold flex items-center gap-2" style={{ color: 'var(--gold-accent)' }}>
+                    Read More <ChevronRight size={16} />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section - NEW */}
+      <section className="py-24 px-6">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
+              Frequently Asked Questions
+            </h2>
+          </motion.div>
+
+          <div className="space-y-4">
+            {[
+              { q: 'How long does the immigration process take?', a: 'Timeline varies by case type, ranging from months to years. We\'ll provide realistic estimates.' },
+              { q: 'What is the cost of legal representation?', a: 'Our fees are transparent and discussed upfront. We offer flexible payment plans.' },
+              { q: 'Do you offer payment plans?', a: 'Yes, we work with clients to create affordable payment arrangements.' },
+              { q: 'Can you represent me if I have a criminal record?', a: 'Absolutely. We handle complex cases involving prior convictions.' },
+              { q: 'What should I bring to my consultation?', a: 'Bring relevant documents: passport, visa, birth certificate, and any legal notices.' }
+            ].map((faq, i) => (
+              <motion.details
+                key={i}
+                className="border rounded-lg p-4 cursor-pointer group"
+                style={{ borderColor: 'var(--light-border)' }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+              >
+                <summary className="font-semibold flex items-center justify-between" style={{ color: 'var(--green-primary)' }}>
+                  {faq.q}
+                  <ChevronRight size={20} className="group-open:rotate-90 transition-transform" />
+                </summary>
+                <p className="mt-3 opacity-85 text-sm">{faq.a}</p>
+              </motion.details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Consultation CTA - Enhanced */}
+      <section className="py-24 px-6" style={{ backgroundColor: 'var(--green-primary)' }}>
+        <div className="max-w-5xl mx-auto text-center space-y-12 text-white">
+          <motion.div
+            className="space-y-4"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }}>
+              <Calendar size={56} className="mx-auto" style={{ color: 'var(--gold-accent)' }} />
+            </motion.div>
+            <h2 className="serif-display text-5xl md:text-6xl font-bold">
+              Your Future Begins
+            </h2>
+            <p className="text-3xl font-light">With One Call.</p>
+            <p className="text-xl opacity-90 max-w-2xl mx-auto">
+              Stop stressing about your legal situation. Schedule your free consultation and let us fight for you.
+            </p>
+          </motion.div>
+
+          <motion.div className="flex flex-col sm:flex-row gap-4 justify-center" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <motion.button
+              className="px-8 py-4 font-semibold rounded-full text-green-900 hover:shadow-lg"
+              style={{ backgroundColor: 'white' }}
+              whileHover={{ y: -4 }}
+              variants={itemVariants}
+            >
+              Book Online Now
+            </motion.button>
+            <motion.button
+              className="px-8 py-4 font-semibold rounded-full border-2 border-white hover:bg-green-700"
+              style={{ color: 'white' }}
+              whileHover={{ y: -4 }}
+              variants={itemVariants}
+            >
+              Call (919) 555-0123
+            </motion.button>
+          </motion.div>
+
+          <p className="text-sm opacity-75">Available Mon-Fri, 9am-5pm EST • Spanish interpreter available • Se Habla Español</p>
+        </div>
+      </section>
+
+      {/* Contact Form Section - NEW */}
+      <section id="contact" className="py-24 px-6 bg-white">
+        <div className="max-w-2xl mx-auto">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
               Get in Touch
             </h2>
-            <p className="text-lg opacity-75">Reach out to schedule your free consultation</p>
-          </div>
+            <p className="text-lg opacity-75">Send us a message and we'll respond within 24 hours</p>
+          </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-12">
-            {/* Location */}
-            <div className="space-y-4">
-              <MapPin size={40} style={{ color: 'var(--gold-accent)' }} />
-              <div>
-                <h3 className="font-semibold mb-2" style={{ color: 'var(--green-primary)' }}>Office Location</h3>
-                <p className="text-sm opacity-85">Raleigh, NC<br/>Downtown Legal District</p>
-              </div>
-            </div>
+          <motion.form
+            className="space-y-4"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {['Name', 'Email', 'Phone'].map((field, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+              >
+                <input
+                  type={field === 'Email' ? 'email' : 'text'}
+                  placeholder={field}
+                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
+                  style={{ borderColor: 'var(--light-border)', '--tw-ring-color': 'var(--green-primary)' } as any}
+                />
+              </motion.div>
+            ))}
 
-            {/* Phone */}
-            <div className="space-y-4">
-              <Phone size={40} style={{ color: 'var(--gold-accent)' }} />
-              <div>
-                <h3 className="font-semibold mb-2" style={{ color: 'var(--green-primary)' }}>Phone</h3>
-                <p className="text-sm opacity-85">
-                  <a href="tel:+19195550123" className="hover:opacity-60">(919) 555-0123</a>
-                  <br />
-                  Mon-Fri, 9am-5pm EST
-                </p>
-              </div>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+            >
+              <textarea
+                placeholder="Tell us about your situation"
+                rows={5}
+                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
+                style={{ borderColor: 'var(--light-border)', '--tw-ring-color': 'var(--green-primary)' } as any}
+              ></textarea>
+            </motion.div>
 
-            {/* Email */}
-            <div className="space-y-4">
-              <Mail size={40} style={{ color: 'var(--gold-accent)' }} />
-              <div>
-                <h3 className="font-semibold mb-2" style={{ color: 'var(--green-primary)' }}>Email</h3>
-                <p className="text-sm opacity-85">
-                  <a href="mailto:info@johneluwa.com" className="hover:opacity-60">info@johneluwa.com</a>
-                  <br />
-                  Response within 24 hours
-                </p>
-              </div>
-            </div>
-          </div>
+            <motion.button
+              type="submit"
+              className="w-full py-4 text-white font-semibold rounded-lg"
+              style={{ backgroundColor: 'var(--green-primary)' }}
+              whileHover={{ y: -2 }}
+              whileTap={{ y: 0 }}
+            >
+              Send Message
+            </motion.button>
+          </motion.form>
+
+          <motion.div
+            className="mt-12 grid md:grid-cols-3 gap-6"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            {[
+              { icon: MapPin, label: 'Raleigh, NC', value: 'Downtown Legal District' },
+              { icon: Phone, label: 'Phone', value: '(919) 555-0123' },
+              { icon: Mail, label: 'Email', value: 'info@johneluwa.com' }
+            ].map((contact, i) => (
+              <motion.div key={i} className="text-center" whileHover={{ y: -4 }}>
+                <contact.icon size={32} className="mx-auto mb-3" style={{ color: 'var(--gold-accent)' }} />
+                <p className="font-semibold text-sm" style={{ color: 'var(--green-primary)' }}>{contact.label}</p>
+                <p className="text-sm opacity-85">{contact.value}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* Footer - Clean, Professional */}
+      {/* Footer - Enhanced */}
       <footer className="py-16 px-6" style={{ backgroundColor: 'var(--green-primary)', color: 'white' }}>
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-12 border-b" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
-          {/* Branding */}
           <div>
             <h4 className="serif-display text-xl font-bold mb-4">John Eluwa, PLLC</h4>
             <p className="text-sm opacity-80">Professional legal services since 1995</p>
+            <p className="text-sm opacity-80 mt-4">Se Habla Español</p>
           </div>
 
-          {/* Practice Areas */}
           <div>
             <h4 className="font-semibold mb-4 text-sm">Practice Areas</h4>
             <ul className="text-sm space-y-2 opacity-80">
@@ -524,7 +709,6 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Resources */}
           <div>
             <h4 className="font-semibold mb-4 text-sm">Quick Links</h4>
             <ul className="text-sm space-y-2 opacity-80">
@@ -534,7 +718,6 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Social */}
           <div>
             <h4 className="font-semibold mb-4 text-sm">Connect</h4>
             <div className="flex gap-4 text-sm opacity-80">
@@ -542,13 +725,20 @@ export default function Home() {
               <a href="#" className="hover:opacity-100 transition">Facebook</a>
               <a href="#" className="hover:opacity-100 transition">Google</a>
             </div>
+            <div className="mt-6">
+              <p className="text-sm font-semibold mb-2">Newsletter</p>
+              <input
+                type="email"
+                placeholder="Your email"
+                className="w-full px-3 py-2 rounded text-sm text-black"
+              />
+            </div>
           </div>
         </div>
 
-        {/* Copyright & Disclaimer */}
         <div className="text-center text-xs opacity-75 space-y-2">
           <p>&copy; 2024 Law Offices of John Eluwa, PLLC. All rights reserved.</p>
-          <p>This website is for informational purposes only and is not a substitute for legal advice. Prior results do not guarantee future outcomes.</p>
+          <p>This website is for informational purposes only. Not a substitute for legal advice. Prior results do not guarantee outcomes.</p>
         </div>
       </footer>
     </div>
