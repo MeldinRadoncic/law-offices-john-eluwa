@@ -171,12 +171,11 @@ export default function Home() {
 
             {/* Main image container */}
             <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl" style={{ zIndex: 1 }}>
-              <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: 'var(--light-border)' }}>
-                <div className="text-center space-y-4">
-                  <Scale size={80} style={{ color: 'var(--green-primary)' }} className="mx-auto" />
-                  <p className="font-medium" style={{ color: 'var(--green-primary)' }}>Attorney Professional Photo</p>
-                </div>
-              </div>
+              <img
+                src="https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?w=600&h=600&fit=crop"
+                alt="Professional attorney John Eluwa"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -340,9 +339,11 @@ export default function Home() {
               }}
             ></div>
             <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl" style={{ zIndex: 1 }}>
-              <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: 'var(--light-border)' }}>
-                <Users size={100} style={{ color: 'var(--green-primary)' }} />
-              </div>
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop"
+                alt="John Eluwa, Attorney at Law"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
 
