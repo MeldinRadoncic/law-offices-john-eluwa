@@ -399,8 +399,10 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
               >
-                <motion.div whileHover={{ scale: 1.1 }} className="mb-4">
-                  <item.icon size={48} className="mx-auto" style={{ color: 'var(--gold-accent)' }} />
+                <motion.div whileHover={{ scale: 1.1 }} className="mb-4 flex justify-center">
+                  <div className="p-4 rounded-full" style={{ backgroundColor: 'var(--green-primary)' }}>
+                    <item.icon size={48} className="mx-auto" style={{ color: 'white' }} />
+                  </div>
                 </motion.div>
                 <h3 className="font-semibold mb-2" style={{ color: 'var(--green-primary)' }}>{item.title}</h3>
                 <p className="text-sm opacity-85">{item.desc}</p>
