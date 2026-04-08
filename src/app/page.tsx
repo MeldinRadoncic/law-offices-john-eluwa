@@ -98,22 +98,22 @@ export default function Home() {
 
       {/* Navigation - Enhanced */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-white/95'}`}>
-        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex justify-between items-center">
           <motion.div
-            className="serif-display text-2xl font-bold"
-            style={{ color: 'var(--green-primary)' }}
+            className="serif-display font-bold"
+            style={{ fontSize: 'clamp(1.25rem, 4vw, 2rem)', color: 'var(--green-primary)' }}
             whileHover={{ scale: 1.05 }}
           >
             John Eluwa
           </motion.div>
 
-          <div className="hidden md:flex gap-12 text-sm font-medium">
+          <div className="hidden md:flex gap-4 lg:gap-8 xl:gap-12 font-medium" style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1.125rem)' }}>
             {['Services', 'About', 'Testimonials', 'Contact'].map((link) => (
               <motion.a
                 key={link}
                 href={`#${link.toLowerCase()}`}
                 whileHover={{ opacity: 0.6 }}
-                className="relative group"
+                className="relative group whitespace-nowrap"
               >
                 {link}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-accent group-hover:w-full transition-all" style={{ backgroundColor: 'var(--gold-accent)' }}></span>
@@ -122,8 +122,8 @@ export default function Home() {
           </div>
 
           <motion.button
-            className="hidden md:block px-6 py-2.5 text-white font-medium text-sm rounded-full hover:shadow-lg"
-            style={{ backgroundColor: 'var(--green-primary)' }}
+            className="hidden md:block px-4 lg:px-6 py-2 lg:py-2.5 text-white font-medium rounded-full hover:shadow-lg"
+            style={{ backgroundColor: 'var(--green-primary)', fontSize: 'clamp(0.75rem, 1.2vw, 1rem)' }}
             whileHover={{ y: -2 }}
             whileTap={{ y: 0 }}
           >
@@ -767,17 +767,17 @@ export default function Home() {
       </section>
 
       {/* Footer - Enhanced */}
-      <footer className="py-16 px-6" style={{ backgroundColor: 'var(--green-primary)', color: 'white' }}>
-        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-12 border-b" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+      <footer className="py-8 md:py-16 px-4 md:px-6" style={{ backgroundColor: 'var(--green-primary)', color: 'white' }}>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12 mb-8 md:mb-12 pb-8 md:pb-12 border-b" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
           <div>
-            <h4 className="serif-display text-xl font-bold mb-4">John Eluwa, PLLC</h4>
-            <p className="text-sm opacity-80">Professional legal services since 1995</p>
-            <p className="text-sm opacity-80 mt-4">Se Habla Español</p>
+            <h4 className="serif-display font-bold mb-3 md:mb-4" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)' }}>John Eluwa, PLLC</h4>
+            <p className="opacity-80 mb-2" style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)' }}>Professional legal services since 1995</p>
+            <p className="opacity-80 mt-2 md:mt-4" style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)' }}>Se Habla Español</p>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4 text-sm">Practice Areas</h4>
-            <ul className="text-sm space-y-2 opacity-80">
+            <h4 className="font-semibold mb-3 md:mb-4" style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.125rem)' }}>Practice Areas</h4>
+            <ul className="space-y-2 opacity-80" style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1rem)' }}>
               <li><a href="#services" className="hover:opacity-100 transition">Immigration Law</a></li>
               <li><a href="#services" className="hover:opacity-100 transition">Criminal Defense</a></li>
               <li><a href="#services" className="hover:opacity-100 transition">Personal Injury</a></li>
@@ -785,8 +785,8 @@ export default function Home() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4 text-sm">Quick Links</h4>
-            <ul className="text-sm space-y-2 opacity-80">
+            <h4 className="font-semibold mb-3 md:mb-4" style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.125rem)' }}>Quick Links</h4>
+            <ul className="space-y-2 opacity-80" style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1rem)' }}>
               <li><a href="#about" className="hover:opacity-100 transition">About John Eluwa</a></li>
               <li><a href="#testimonials" className="hover:opacity-100 transition">Testimonials</a></li>
               <li><a href="#contact" className="hover:opacity-100 transition">Contact</a></li>
@@ -794,27 +794,28 @@ export default function Home() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4 text-sm">Connect</h4>
-            <div className="flex gap-4 text-sm opacity-80">
+            <h4 className="font-semibold mb-3 md:mb-4" style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.125rem)' }}>Connect</h4>
+            <div className="flex gap-3 md:gap-4 opacity-80 mb-4 md:mb-6" style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1rem)' }}>
               <a href="#" className="hover:opacity-100 transition">LinkedIn</a>
               <a href="#" className="hover:opacity-100 transition">Facebook</a>
               <a href="#" className="hover:opacity-100 transition">Google</a>
             </div>
-            <div className="mt-6">
-              <p className="text-sm font-semibold mb-2">Newsletter</p>
+            <div>
+              <p className="font-semibold mb-2" style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1rem)' }}>Newsletter</p>
               <input
                 type="email"
                 placeholder="Your email"
-                className="w-full px-3 py-2 rounded text-sm text-black"
+                className="w-full px-3 py-2 rounded text-black"
+                style={{ fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)' }}
               />
             </div>
           </div>
         </div>
 
-        <div className="text-center text-xs opacity-75 space-y-2">
+        <div className="text-center opacity-75 space-y-1 md:space-y-2" style={{ fontSize: 'clamp(0.75rem, 1vw, 0.875rem)' }}>
           <p>&copy; 2024 Law Offices of John Eluwa, PLLC. All rights reserved.</p>
           <p>This website is for informational purposes only. Not a substitute for legal advice. Prior results do not guarantee outcomes.</p>
-          <p className="pt-2 border-t" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+          <p className="pt-1 md:pt-2 border-t" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
             Powered by <a href="https://appwizardpro.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition font-semibold">App Wizard</a>
           </p>
         </div>
