@@ -394,6 +394,53 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Courts - Can Practice Before */}
+      <section className="py-24 px-6 bg-stone-100">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+            transition={{ duration: 0.7 }}
+          >
+            <h2 className="serif-display text-5xl md:text-6xl font-bold" style={{ color: 'var(--green-primary)' }}>
+              Can Practice Before:
+            </h2>
+          </motion.div>
+
+          <div className="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-16">
+            <motion.div
+              className="w-full md:w-auto flex justify-center"
+              initial={{ opacity: 0, x: -100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+              transition={{ duration: 0.8 }}
+            >
+              <img
+                src="https://www.johneluwa.com/images/sc.png"
+                alt="US Supreme Court Seal"
+                className="h-64 w-64 object-contain"
+              />
+            </motion.div>
+
+            <motion.div
+              className="w-full md:w-auto flex justify-center"
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+              transition={{ duration: 0.8 }}
+            >
+              <img
+                src="https://www.johneluwa.com/images/ncsc.jpg"
+                alt="North Carolina Supreme Court Seal"
+                className="h-64 w-64 object-contain"
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Stats Counter - NEW */}
       <section className="py-24 px-6" style={{ backgroundColor: 'var(--green-primary)', color: 'white' }}>
         <div className="max-w-7xl mx-auto">
