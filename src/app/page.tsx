@@ -212,9 +212,15 @@ export default function Home() {
           </motion.button>
 
           {/* Mobile Menu Toggle */}
-          <button className="lg:hidden p-2" onClick={() => setMenuOpen(!menuOpen)} style={{ color: 'var(--green-primary)' }}>
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <motion.button
+            className="lg:hidden p-2 rounded-full hover:bg-stone-100 transition-colors flex items-center justify-center"
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{ color: 'var(--green-primary)' }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {menuOpen ? <X size={28} strokeWidth={2.5} /> : <Menu size={28} strokeWidth={2.5} />}
+          </motion.button>
         </div>
 
         {/* Mobile Menu - Slide from Right */}
