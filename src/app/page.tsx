@@ -218,8 +218,8 @@ export default function Home() {
           >
             <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl" style={{ backgroundColor: 'white' }}>
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=700&fit=crop"
-                alt="Professional Attorney"
+                src="/john.png"
+                alt="Professional Attorney John Eluwa"
                 className="w-full h-full object-cover object-center"
               />
             </div>
