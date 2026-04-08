@@ -227,7 +227,7 @@ export default function Home() {
               animate={{ opacity: 0.5 }}
               exit={{ opacity: 0 }}
               onClick={() => setMenuOpen(false)}
-              style={{ top: '100%' }}
+              transition={{ duration: 0.2 }}
             />
 
             {/* Sliding Menu */}
@@ -358,7 +358,7 @@ export default function Home() {
         }}></div>
 
         <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center relative z-10">
-          <motion.div className="space-y-6 sm:space-y-8 md:space-y-10" variants={containerVariants} initial="hidden" animate="visible">
+          <motion.div className="space-y-6 sm:space-y-8 md:space-y-10 text-center md:text-left" variants={containerVariants} initial="hidden" animate="visible">
             <motion.div
               className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-full"
               style={{ backgroundColor: 'var(--green-primary)', color: 'white' }}
@@ -381,7 +381,7 @@ export default function Home() {
               Over 25 years helping families stay together. Expert immigration counsel, criminal defense, and personal injury representation.
             </motion.p>
 
-            <motion.div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4" variants={itemVariants}>
+            <motion.div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4 md:justify-start justify-center" variants={itemVariants}>
               <motion.button
                 className="px-5 sm:px-8 py-3 sm:py-4 text-white font-semibold rounded-full hover:shadow-xl text-center w-full sm:w-auto"
                 style={{ backgroundColor: 'var(--green-primary)', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}
@@ -399,8 +399,8 @@ export default function Home() {
               </motion.button>
             </motion.div>
 
-            <motion.div className="pt-4 sm:pt-6 md:pt-8 space-y-4 sm:space-y-6 border-t" style={{ borderColor: 'var(--light-border)' }} variants={itemVariants}>
-              <div className="flex gap-4 sm:gap-6 md:gap-8">
+            <motion.div className="pt-4 sm:pt-6 md:pt-8 space-y-4 sm:space-y-6 border-t text-center md:text-left" style={{ borderColor: 'var(--light-border)' }} variants={itemVariants}>
+              <div className="flex gap-4 sm:gap-6 md:gap-8 justify-center md:justify-start">
                 <motion.div whileHover={{ scale: 1.1 }}>
                   <div className="serif-display font-bold" style={{ color: 'var(--gold-accent)', fontSize: 'clamp(1.875rem, 4vw, 2.25rem)' }}>25+</div>
                   <p className="mt-1 sm:mt-2 font-bold" style={{ color: 'var(--gold-accent)', fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)' }}>Years Experience</p>
@@ -453,7 +453,7 @@ export default function Home() {
       <section id="services" className="py-12 sm:py-16 md:py-24 px-3 sm:px-4 md:px-6">
         <div className="w-full max-w-7xl mx-auto">
           <motion.div
-            className="mb-8 sm:mb-12 md:mb-20"
+            className="mb-8 sm:mb-12 md:mb-20 text-center md:text-left"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '0px 0px -100px 0px' }}
@@ -473,7 +473,7 @@ export default function Home() {
             ].map((service, i) => (
               <motion.div
                 key={i}
-                className="p-8 border-l-4 hover:shadow-lg"
+                className="p-6 sm:p-8 border-l-4 hover:shadow-lg text-center md:text-left"
                 style={{ borderColor: 'var(--gold-accent)', backgroundColor: 'white' }}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -481,7 +481,9 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 whileHover={{ scale: 1.02 }}
               >
-                <service.icon size={40} style={{ color: 'var(--green-primary)' }} className="mb-6" />
+                <div className="flex md:block justify-center">
+                  <service.icon size={40} style={{ color: 'var(--green-primary)' }} className="mb-6" />
+                </div>
                 <h3 className="serif-display text-2xl font-bold mb-6" style={{ color: 'var(--green-primary)' }}>
                   {service.title}
                 </h3>
@@ -519,7 +521,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            className="space-y-6 sm:space-y-8"
+            className="space-y-6 sm:space-y-8 text-center md:text-left"
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '0px 0px -100px 0px' }}
