@@ -61,12 +61,28 @@ export default function Home() {
           display: flex;
           overflow: hidden;
           background: var(--green-primary);
-          padding: 1rem 0;
+          padding: 1.5rem 0;
         }
         .marquee-content {
           display: flex;
           gap: 2rem;
-          animation: scroll 30s linear infinite;
+          animation: scroll 40s linear infinite;
+        }
+        .marquee-content span {
+          font-size: clamp(0.875rem, 2vw, 1.125rem);
+          font-weight: 700;
+          color: white;
+          letter-spacing: 0.5px;
+          white-space: nowrap;
+          padding: 0.5rem 1rem;
+          border-radius: 6px;
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          transition: all 0.3s ease;
+        }
+        .marquee-content span:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: scale(1.05);
         }
         .marquee-content:hover {
           animation-play-state: paused;
@@ -228,16 +244,16 @@ export default function Home() {
       </section>
 
       {/* Marquee Trust Bar */}
-      <div className="marquee">
+      <div className="marquee" role="region" aria-label="Attorney credentials and achievements">
         <div className="marquee-content">
           {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex gap-8 whitespace-nowrap">
-              <span className="font-semibold" style={{ color: 'var(--gold-accent)' }}>★ Avvo 10/10 Superb ★</span>
-              <span className="font-semibold" style={{ color: 'var(--gold-accent)' }}>BBB A+ Accredited ★</span>
-              <span className="font-semibold" style={{ color: 'var(--gold-accent)' }}>25+ Years Experience ★</span>
-              <span className="font-semibold" style={{ color: 'var(--gold-accent)' }}>Supreme Court Admitted ★</span>
-              <span className="font-semibold" style={{ color: 'var(--gold-accent)' }}>1000+ Cases Won ★</span>
-              <span className="font-semibold" style={{ color: 'var(--gold-accent)' }}>Free Consultation ★</span>
+            <div key={i} className="flex gap-2 md:gap-4 whitespace-nowrap">
+              <span aria-label="Avvo 10 out of 10 Superb rating">★ Avvo 10/10 Superb ★</span>
+              <span aria-label="BBB A Plus Accredited">BBB A+ Accredited ★</span>
+              <span aria-label="25 plus years experience">25+ Years Experience ★</span>
+              <span aria-label="Supreme Court Admitted">Supreme Court Admitted ★</span>
+              <span aria-label="1000 plus cases won">1000+ Cases Won ★</span>
+              <span aria-label="Free consultation available">Free Consultation ★</span>
             </div>
           ))}
         </div>
