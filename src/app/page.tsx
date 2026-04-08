@@ -36,6 +36,7 @@ const itemVariants = {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [servicesDropdown, setServicesDropdown] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -96,65 +97,185 @@ export default function Home() {
         }
       `}</style>
 
-      {/* Navigation - Enhanced */}
+      {/* Navigation - Professional Modern Structure */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-white/95'}`}>
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
+          {/* Logo */}
           <motion.a
             href="#"
             whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-2"
+            className="flex items-center"
           >
             <img
               src="https://www.johneluwa.com/images/EagleLogo.png"
               alt="Law Offices of John Eluwa"
-              style={{ height: 'clamp(40px, 8vw, 60px)', width: 'auto' }}
+              style={{ height: 'clamp(40px, 6vw, 55px)', width: 'auto' }}
               className="object-contain"
             />
           </motion.a>
 
-          <div className="hidden md:flex gap-4 lg:gap-8 xl:gap-12 font-medium" style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1.125rem)' }}>
-            {['Services', 'About', 'Testimonials', 'Contact'].map((link) => (
-              <motion.a
-                key={link}
-                href={`#${link.toLowerCase()}`}
-                whileHover={{ opacity: 0.6 }}
-                className="relative group whitespace-nowrap"
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-1 xl:gap-3 font-medium" style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1rem)' }}>
+            <motion.a
+              href="#"
+              whileHover={{ opacity: 0.6 }}
+              className="px-3 py-2 relative group whitespace-nowrap"
+              style={{ color: 'var(--dark-text)' }}
+            >
+              Home
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-accent group-hover:w-full transition-all" style={{ backgroundColor: 'var(--gold-accent)' }}></span>
+            </motion.a>
+
+            {/* Services Dropdown */}
+            <div className="relative group">
+              <motion.button
+                onMouseEnter={() => setServicesDropdown(true)}
+                onMouseLeave={() => setServicesDropdown(false)}
+                className="px-3 py-2 flex items-center gap-2 relative whitespace-nowrap"
+                style={{ color: 'var(--dark-text)' }}
               >
-                {link}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-accent group-hover:w-full transition-all" style={{ backgroundColor: 'var(--gold-accent)' }}></span>
-              </motion.a>
-            ))}
+                Services
+                <ChevronRight size={18} className={`transition-transform ${servicesDropdown ? 'rotate-90' : ''}`} />
+              </motion.button>
+
+              {/* Dropdown Menu */}
+              {servicesDropdown && (
+                <motion.div
+                  onMouseEnter={() => setServicesDropdown(true)}
+                  onMouseLeave={() => setServicesDropdown(false)}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute left-0 mt-0 w-56 bg-white border rounded-lg shadow-xl py-2"
+                  style={{ borderColor: 'var(--light-border)' }}
+                >
+                  {[
+                    { name: 'Immigration Law', icon: '🌍' },
+                    { name: 'Criminal Defense', icon: '⚖️' },
+                    { name: 'Traffic Violations', icon: '🚗' },
+                    { name: 'Personal Injury', icon: '🛡️' }
+                  ].map((service) => (
+                    <motion.a
+                      key={service.name}
+                      href="#services"
+                      className="px-4 py-3 flex items-center gap-3 hover:bg-stone-50 transition-colors"
+                      whileHover={{ x: 5 }}
+                      style={{ color: 'var(--dark-text)' }}
+                    >
+                      <span className="text-lg">{service.icon}</span>
+                      <span className="font-medium text-sm">{service.name}</span>
+                    </motion.a>
+                  ))}
+                </motion.div>
+              )}
+            </div>
+
+            <motion.a
+              href="#about"
+              whileHover={{ opacity: 0.6 }}
+              className="px-3 py-2 relative group whitespace-nowrap"
+              style={{ color: 'var(--dark-text)' }}
+            >
+              About
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-accent group-hover:w-full transition-all" style={{ backgroundColor: 'var(--gold-accent)' }}></span>
+            </motion.a>
+
+            <motion.a
+              href="#testimonials"
+              whileHover={{ opacity: 0.6 }}
+              className="px-3 py-2 relative group whitespace-nowrap"
+              style={{ color: 'var(--dark-text)' }}
+            >
+              Testimonials
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-accent group-hover:w-full transition-all" style={{ backgroundColor: 'var(--gold-accent)' }}></span>
+            </motion.a>
+
+            <motion.a
+              href="#contact"
+              whileHover={{ opacity: 0.6 }}
+              className="px-3 py-2 relative group whitespace-nowrap"
+              style={{ color: 'var(--dark-text)' }}
+            >
+              Contact
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-accent group-hover:w-full transition-all" style={{ backgroundColor: 'var(--gold-accent)' }}></span>
+            </motion.a>
           </div>
 
+          {/* Desktop CTA Button */}
           <motion.button
-            className="hidden md:block px-4 lg:px-6 py-2 lg:py-2.5 text-white font-medium rounded-full hover:shadow-lg"
-            style={{ backgroundColor: 'var(--green-primary)', fontSize: 'clamp(0.75rem, 1.2vw, 1rem)' }}
+            className="hidden lg:block px-5 py-2.5 text-white font-medium rounded-full hover:shadow-lg whitespace-nowrap"
+            style={{ backgroundColor: 'var(--green-primary)', fontSize: 'clamp(0.8rem, 1vw, 0.95rem)' }}
             whileHover={{ y: -2 }}
             whileTap={{ y: 0 }}
           >
             Free Consultation
           </motion.button>
 
-          <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)} style={{ color: 'var(--green-primary)' }}>
+          {/* Mobile Menu Toggle */}
+          <button className="lg:hidden p-2" onClick={() => setMenuOpen(!menuOpen)} style={{ color: 'var(--green-primary)' }}>
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
+        {/* Mobile Menu */}
         {menuOpen && (
           <motion.div
-            className="md:hidden bg-white border-t"
+            className="lg:hidden bg-white border-t"
             style={{ borderColor: 'var(--light-border)' }}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <div className="p-6 space-y-4">
-              {['Services', 'About', 'Testimonials', 'Contact'].map((link) => (
-                <a key={link} href={`#${link.toLowerCase()}`} className="block text-sm font-medium hover:opacity-60">
-                  {link}
-                </a>
-              ))}
+            <div className="p-4 space-y-2">
+              <a href="#" className="block px-4 py-3 text-sm font-medium hover:bg-stone-50 rounded transition" style={{ color: 'var(--dark-text)' }}>
+                Home
+              </a>
+
+              {/* Mobile Services Dropdown */}
+              <div>
+                <button
+                  onClick={() => setServicesDropdown(!servicesDropdown)}
+                  className="w-full text-left px-4 py-3 text-sm font-medium flex items-center justify-between rounded hover:bg-stone-50 transition"
+                  style={{ color: 'var(--dark-text)' }}
+                >
+                  Services
+                  <ChevronRight size={18} className={`transition-transform ${servicesDropdown ? 'rotate-90' : ''}`} />
+                </button>
+                {servicesDropdown && (
+                  <div className="bg-stone-50 py-2">
+                    {[
+                      { name: 'Immigration Law', icon: '🌍' },
+                      { name: 'Criminal Defense', icon: '⚖️' },
+                      { name: 'Traffic Violations', icon: '🚗' },
+                      { name: 'Personal Injury', icon: '🛡️' }
+                    ].map((service) => (
+                      <a
+                        key={service.name}
+                        href="#services"
+                        className="block px-6 py-2 text-xs font-medium hover:opacity-70 transition flex items-center gap-2"
+                        style={{ color: 'var(--dark-text)' }}
+                      >
+                        <span>{service.icon}</span>
+                        {service.name}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <a href="#about" className="block px-4 py-3 text-sm font-medium hover:bg-stone-50 rounded transition" style={{ color: 'var(--dark-text)' }}>
+                About
+              </a>
+
+              <a href="#testimonials" className="block px-4 py-3 text-sm font-medium hover:bg-stone-50 rounded transition" style={{ color: 'var(--dark-text)' }}>
+                Testimonials
+              </a>
+
+              <a href="#contact" className="block px-4 py-3 text-sm font-medium hover:bg-stone-50 rounded transition" style={{ color: 'var(--dark-text)' }}>
+                Contact
+              </a>
+
               <motion.button
-                className="w-full py-3 text-white font-medium rounded-full text-sm"
+                className="w-full py-3 text-white font-medium rounded-full text-sm mt-4"
                 style={{ backgroundColor: 'var(--green-primary)' }}
                 whileHover={{ y: -2 }}
               >
