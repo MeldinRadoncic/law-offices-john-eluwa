@@ -99,7 +99,7 @@ export default function Home() {
 
       {/* Navigation - Professional Modern Structure */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-white/95'}`}>
-        <div className="w-full px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 flex justify-between items-center max-w-7xl mx-auto">
+        <div className="w-full px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 flex justify-between items-center">
           {/* Logo */}
           <motion.a
             href="#"
@@ -213,7 +213,7 @@ export default function Home() {
 
           {/* Mobile Menu Toggle */}
           <motion.button
-            className="lg:hidden p-2 rounded-full hover:bg-stone-100 transition-colors flex items-center justify-center"
+            className="lg:hidden p-2 rounded-full hover:bg-stone-100 transition-colors flex items-center justify-center flex-shrink-0 ml-auto"
             onClick={() => setMenuOpen(!menuOpen)}
             style={{ color: 'var(--green-primary)' }}
             whileHover={{ scale: 1.1 }}
