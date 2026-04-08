@@ -99,12 +99,12 @@ export default function Home() {
 
       {/* Navigation - Professional Modern Structure */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-white/95'}`}>
-        <div className="w-full px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 flex justify-between items-center">
+        <div className="w-full px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 flex items-center">
           {/* Logo */}
           <motion.a
             href="#"
             whileHover={{ scale: 1.05 }}
-            className="flex items-center"
+            className="flex items-center flex-shrink-0"
           >
             <img
               src="https://www.johneluwa.com/images/EagleLogo.png"
@@ -115,7 +115,7 @@ export default function Home() {
           </motion.a>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-3 font-medium" style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1rem)' }}>
+          <div className="hidden lg:flex items-center gap-1 xl:gap-3 font-medium flex-1 justify-center" style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1rem)' }}>
             <motion.a
               href="#"
               whileHover={{ opacity: 0.6 }}
@@ -201,9 +201,12 @@ export default function Home() {
             </motion.a>
           </div>
 
+          {/* Spacer for desktop */}
+          <div className="hidden lg:flex flex-1"></div>
+
           {/* Desktop CTA Button */}
           <motion.button
-            className="hidden lg:block px-5 py-2.5 text-white font-medium rounded-full hover:shadow-lg whitespace-nowrap"
+            className="hidden lg:block px-5 py-2.5 text-white font-medium rounded-full hover:shadow-lg whitespace-nowrap flex-shrink-0"
             style={{ backgroundColor: 'var(--green-primary)', fontSize: 'clamp(0.8rem, 1vw, 0.95rem)' }}
             whileHover={{ y: -2 }}
             whileTap={{ y: 0 }}
@@ -211,9 +214,9 @@ export default function Home() {
             Free Consultation
           </motion.button>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Toggle - Always visible on mobile */}
           <motion.button
-            className="lg:hidden p-2 rounded-full hover:bg-stone-100 transition-colors flex items-center justify-center flex-shrink-0 ml-auto"
+            className="lg:hidden p-2 rounded-full hover:bg-stone-100 active:bg-stone-200 transition-colors flex items-center justify-center flex-shrink-0 w-10 h-10"
             onClick={() => setMenuOpen(!menuOpen)}
             style={{ color: 'var(--green-primary)' }}
             whileHover={{ scale: 1.1 }}
