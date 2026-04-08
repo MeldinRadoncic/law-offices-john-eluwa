@@ -197,15 +197,15 @@ export default function Home() {
               <div className="flex gap-8">
                 <motion.div whileHover={{ scale: 1.1 }}>
                   <div className="serif-display text-4xl font-bold" style={{ color: 'var(--gold-accent)' }}>25+</div>
-                  <p className="text-sm mt-2 opacity-75">Years Experience</p>
+                  <p className="text-sm mt-2 font-bold" style={{ color: 'var(--gold-accent)' }}>Years Experience</p>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.1 }}>
                   <div className="serif-display text-4xl font-bold" style={{ color: 'var(--gold-accent)' }}>1000+</div>
-                  <p className="text-sm mt-2 opacity-75">Cases Won</p>
+                  <p className="text-sm mt-2 font-bold" style={{ color: 'var(--gold-accent)' }}>Cases Won</p>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.1 }}>
                   <div className="serif-display text-4xl font-bold" style={{ color: 'var(--gold-accent)' }}>98%</div>
-                  <p className="text-sm mt-2 opacity-75">Success Rate</p>
+                  <p className="text-sm mt-2 font-bold" style={{ color: 'var(--gold-accent)' }}>Success Rate</p>
                 </motion.div>
               </div>
             </motion.div>
