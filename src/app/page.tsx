@@ -593,21 +593,21 @@ export default function Home() {
       </section>
 
       {/* FAQ Section - NEW */}
-      <section className="py-24 px-6">
-        <div className="max-w-3xl mx-auto">
+      <section className="py-12 md:py-24 px-4 md:px-6">
+        <div className="max-w-7xl mx-auto">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-8 md:mb-16"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '0px 0px -100px 0px' }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
+            <h2 className="serif-display font-bold mb-2 md:mb-4" style={{ color: 'var(--green-primary)', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
               Frequently Asked Questions
             </h2>
           </motion.div>
 
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
             {[
               { q: 'How long does the immigration process take?', a: 'Timeline varies by case type, ranging from months to years. We\'ll provide realistic estimates.' },
               { q: 'What is the cost of legal representation?', a: 'Our fees are transparent and discussed upfront. We offer flexible payment plans.' },
@@ -617,18 +617,18 @@ export default function Home() {
             ].map((faq, i) => (
               <motion.details
                 key={i}
-                className="border rounded-lg p-4 cursor-pointer group"
-                style={{ borderColor: 'var(--light-border)' }}
+                className="border rounded-lg cursor-pointer group"
+                style={{ borderColor: 'var(--light-border)', padding: 'clamp(1rem, 2.5vw, 1.5rem)' }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
               >
-                <summary className="font-semibold flex items-center justify-between" style={{ color: 'var(--green-primary)' }}>
+                <summary className="font-semibold flex items-center justify-between cursor-pointer select-none" style={{ color: 'var(--green-primary)', fontSize: 'clamp(0.95rem, 2vw, 1.125rem)' }}>
                   {faq.q}
-                  <ChevronRight size={20} className="group-open:rotate-90 transition-transform" />
+                  <ChevronRight size={24} className="group-open:rotate-90 transition-transform flex-shrink-0 ml-3" />
                 </summary>
-                <p className="mt-3 opacity-85 text-sm">{faq.a}</p>
+                <p className="mt-3 opacity-85" style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)' }}>{faq.a}</p>
               </motion.details>
             ))}
           </div>
