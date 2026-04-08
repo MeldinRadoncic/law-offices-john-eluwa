@@ -759,7 +759,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '0px 0px -100px 0px' }}
                 transition={{ duration: 0.7, delay: i * 0.15 }}
-                whileHover={{ y: -8, shadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}
+                whileHover={{ y: -8 }}
               >
                 <div className="h-48 overflow-hidden bg-stone-200 relative group">
                   <motion.img
