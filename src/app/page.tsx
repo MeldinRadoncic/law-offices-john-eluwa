@@ -489,7 +489,7 @@ export default function Home() {
                 </h3>
                 <ul className="space-y-4">
                   {service.items.map((item, j) => (
-                    <li key={j} className="flex gap-3 text-sm opacity-85">
+                    <li key={j} className="flex gap-3 text-sm opacity-85 justify-center">
                       <span className="font-bold" style={{ color: 'var(--gold-accent)' }}>→</span>
                       <span>{item}</span>
                     </li>
