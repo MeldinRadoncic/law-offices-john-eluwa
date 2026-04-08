@@ -62,20 +62,20 @@ export default function Home() {
           display: flex;
           overflow: hidden;
           background: var(--green-primary);
-          padding: 1.5rem 0;
+          padding: clamp(0.75rem, 2vw, 1.5rem) 0;
         }
         .marquee-content {
           display: flex;
-          gap: 2rem;
+          gap: clamp(1rem, 2vw, 2rem);
           animation: scroll 40s linear infinite;
         }
         .marquee-content span {
-          font-size: clamp(0.875rem, 2vw, 1.125rem);
+          font-size: clamp(0.75rem, 1.8vw, 1.125rem);
           font-weight: 700;
           color: white;
           letter-spacing: 0.5px;
           white-space: nowrap;
-          padding: 0.5rem 1rem;
+          padding: clamp(0.25rem, 0.75vw, 0.5rem) clamp(0.5rem, 1vw, 1rem);
           border-radius: 6px;
           background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(10px);
@@ -99,7 +99,7 @@ export default function Home() {
 
       {/* Navigation - Professional Modern Structure */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-white/95'}`}>
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
+        <div className="w-full px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 flex justify-between items-center max-w-7xl mx-auto">
           {/* Logo */}
           <motion.a
             href="#"
@@ -217,137 +217,201 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Slide from Right */}
         {menuOpen && (
-          <motion.div
-            className="lg:hidden bg-white border-t"
-            style={{ borderColor: 'var(--light-border)' }}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <div className="p-4 space-y-2">
-              <a href="#" className="block px-4 py-3 text-sm font-medium hover:bg-stone-50 rounded transition" style={{ color: 'var(--dark-text)' }}>
-                Home
-              </a>
+          <>
+            {/* Backdrop Overlay */}
+            <motion.div
+              className="fixed inset-0 bg-black lg:hidden z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMenuOpen(false)}
+              style={{ top: '100%' }}
+            />
 
-              {/* Mobile Services Dropdown */}
-              <div>
-                <button
-                  onClick={() => setServicesDropdown(!servicesDropdown)}
-                  className="w-full text-left px-4 py-3 text-sm font-medium flex items-center justify-between rounded hover:bg-stone-50 transition"
-                  style={{ color: 'var(--dark-text)' }}
+            {/* Sliding Menu */}
+            <motion.div
+              className="fixed top-0 right-0 h-screen w-[60%] bg-white shadow-2xl lg:hidden z-50 flex flex-col overflow-y-auto"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            >
+              {/* Menu Header with Close Button */}
+              <div className="flex items-center justify-between p-4 sm:p-6 border-b" style={{ borderColor: 'var(--light-border)' }}>
+                <h3 className="font-semibold" style={{ color: 'var(--green-primary)', fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}>Menu</h3>
+                <motion.button
+                  onClick={() => setMenuOpen(false)}
+                  className="p-2 rounded-full hover:bg-stone-100 transition"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  Services
-                  <ChevronRight size={18} className={`transition-transform ${servicesDropdown ? 'rotate-90' : ''}`} />
-                </button>
-                {servicesDropdown && (
-                  <div className="bg-stone-50 py-2">
-                    {[
-                      { name: 'Immigration Law', icon: '🌍' },
-                      { name: 'Criminal Defense', icon: '⚖️' },
-                      { name: 'Traffic Violations', icon: '🚗' },
-                      { name: 'Personal Injury', icon: '🛡️' }
-                    ].map((service) => (
-                      <a
-                        key={service.name}
-                        href="#services"
-                        className="block px-6 py-2 text-xs font-medium hover:opacity-70 transition flex items-center gap-2"
-                        style={{ color: 'var(--dark-text)' }}
-                      >
-                        <span>{service.icon}</span>
-                        {service.name}
-                      </a>
-                    ))}
-                  </div>
-                )}
+                  <X size={24} style={{ color: 'var(--green-primary)' }} />
+                </motion.button>
               </div>
 
-              <a href="#about" className="block px-4 py-3 text-sm font-medium hover:bg-stone-50 rounded transition" style={{ color: 'var(--dark-text)' }}>
-                About
-              </a>
+              {/* Menu Items */}
+              <div className="flex-1 p-4 sm:p-6 space-y-1">
+                <motion.a
+                  href="#"
+                  onClick={() => setMenuOpen(false)}
+                  className="block px-4 py-4 text-sm font-medium hover:bg-stone-50 rounded-lg transition"
+                  style={{ color: 'var(--dark-text)' }}
+                  whileHover={{ x: -4 }}
+                >
+                  Home
+                </motion.a>
 
-              <a href="#testimonials" className="block px-4 py-3 text-sm font-medium hover:bg-stone-50 rounded transition" style={{ color: 'var(--dark-text)' }}>
-                Testimonials
-              </a>
+                {/* Mobile Services Dropdown */}
+                <div>
+                  <motion.button
+                    onClick={() => setServicesDropdown(!servicesDropdown)}
+                    className="w-full text-left px-4 py-4 text-sm font-medium flex items-center justify-between rounded-lg hover:bg-stone-50 transition"
+                    style={{ color: 'var(--dark-text)' }}
+                    whileHover={{ x: -4 }}
+                  >
+                    Services
+                    <ChevronRight size={18} className={`transition-transform ${servicesDropdown ? 'rotate-90' : ''}`} />
+                  </motion.button>
+                  {servicesDropdown && (
+                    <motion.div
+                      className="bg-stone-50 py-2 mt-1 rounded-lg overflow-hidden"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                    >
+                      {[
+                        { name: 'Immigration Law', icon: '🌍' },
+                        { name: 'Criminal Defense', icon: '⚖️' },
+                        { name: 'Traffic Violations', icon: '🚗' },
+                        { name: 'Personal Injury', icon: '🛡️' }
+                      ].map((service) => (
+                        <motion.a
+                          key={service.name}
+                          href="#services"
+                          onClick={() => setMenuOpen(false)}
+                          className="block px-8 py-3 text-xs font-medium hover:opacity-70 transition flex items-center gap-2"
+                          style={{ color: 'var(--dark-text)' }}
+                          whileHover={{ x: -2 }}
+                        >
+                          <span>{service.icon}</span>
+                          {service.name}
+                        </motion.a>
+                      ))}
+                    </motion.div>
+                  )}
+                </div>
 
-              <a href="#contact" className="block px-4 py-3 text-sm font-medium hover:bg-stone-50 rounded transition" style={{ color: 'var(--dark-text)' }}>
-                Contact
-              </a>
+                <motion.a
+                  href="#about"
+                  onClick={() => setMenuOpen(false)}
+                  className="block px-4 py-4 text-sm font-medium hover:bg-stone-50 rounded-lg transition"
+                  style={{ color: 'var(--dark-text)' }}
+                  whileHover={{ x: -4 }}
+                >
+                  About
+                </motion.a>
 
-              <motion.button
-                className="w-full py-3 text-white font-medium rounded-full text-sm mt-4"
-                style={{ backgroundColor: 'var(--green-primary)' }}
-                whileHover={{ y: -2 }}
-              >
-                Free Consultation
-              </motion.button>
-            </div>
-          </motion.div>
+                <motion.a
+                  href="#testimonials"
+                  onClick={() => setMenuOpen(false)}
+                  className="block px-4 py-4 text-sm font-medium hover:bg-stone-50 rounded-lg transition"
+                  style={{ color: 'var(--dark-text)' }}
+                  whileHover={{ x: -4 }}
+                >
+                  Testimonials
+                </motion.a>
+
+                <motion.a
+                  href="#contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="block px-4 py-4 text-sm font-medium hover:bg-stone-50 rounded-lg transition"
+                  style={{ color: 'var(--dark-text)' }}
+                  whileHover={{ x: -4 }}
+                >
+                  Contact
+                </motion.a>
+              </div>
+
+              {/* CTA Button at Bottom */}
+              <div className="p-4 sm:p-6 border-t" style={{ borderColor: 'var(--light-border)' }}>
+                <motion.button
+                  className="w-full py-4 text-white font-semibold rounded-full text-sm"
+                  style={{ backgroundColor: 'var(--green-primary)' }}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ y: 0 }}
+                >
+                  Free Consultation
+                </motion.button>
+              </div>
+            </motion.div>
+          </>
         )}
       </nav>
 
       {/* Hero Section - Enhanced with Animations */}
-      <section className="pt-40 pb-24 px-6 md:pt-48 md:pb-32" style={{ backgroundColor: 'var(--cream-bg)' }}>
+      <section className="pt-28 pb-12 px-3 sm:px-4 md:px-6 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32" style={{ backgroundColor: 'var(--cream-bg)' }}>
         <div className="absolute inset-0 opacity-30" style={{
           background: 'linear-gradient(135deg, rgba(27,77,62,0.05) 0%, rgba(212,165,116,0.05) 100%)',
           pointerEvents: 'none'
         }}></div>
 
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
-          <motion.div className="space-y-10" variants={containerVariants} initial="hidden" animate="visible">
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center relative z-10">
+          <motion.div className="space-y-6 sm:space-y-8 md:space-y-10" variants={containerVariants} initial="hidden" animate="visible">
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-full"
               style={{ backgroundColor: 'var(--green-primary)', color: 'white' }}
               variants={itemVariants}
             >
-              <Award size={16} />
+              <Award size={14} className="sm:w-4 sm:h-4" />
               25+ Years of Excellence
             </motion.div>
 
-            <motion.div className="space-y-4" variants={itemVariants}>
-              <h1 className="serif-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight" style={{ color: 'var(--green-primary)' }}>
+            <motion.div className="space-y-2 sm:space-y-3" variants={itemVariants}>
+              <h1 className="serif-display font-bold leading-tight" style={{ color: 'var(--green-primary)', fontSize: 'clamp(2rem, 7vw, 3.5rem)' }}>
                 Facing Deportation?
               </h1>
-              <h2 className="text-3xl md:text-4xl font-light" style={{ color: 'var(--dark-text)' }}>
+              <h2 className="font-light" style={{ color: 'var(--dark-text)', fontSize: 'clamp(1.25rem, 4vw, 1.875rem)' }}>
                 Get the legal protection you deserve.
               </h2>
             </motion.div>
 
-            <motion.p className="text-lg leading-relaxed opacity-85 max-w-lg" variants={itemVariants} style={{ color: 'var(--dark-text)' }}>
+            <motion.p className="leading-relaxed opacity-85" variants={itemVariants} style={{ color: 'var(--dark-text)', fontSize: 'clamp(0.95rem, 2vw, 1.125rem)' }}>
               Over 25 years helping families stay together. Expert immigration counsel, criminal defense, and personal injury representation.
             </motion.p>
 
-            <motion.div className="flex flex-col sm:flex-row gap-4 pt-4" variants={itemVariants}>
+            <motion.div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4" variants={itemVariants}>
               <motion.button
-                className="px-8 py-4 text-white font-semibold rounded-full hover:shadow-xl text-center"
-                style={{ backgroundColor: 'var(--green-primary)' }}
+                className="px-5 sm:px-8 py-3 sm:py-4 text-white font-semibold rounded-full hover:shadow-xl text-center w-full sm:w-auto"
+                style={{ backgroundColor: 'var(--green-primary)', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}
                 whileHover={{ y: -4 }}
                 whileTap={{ y: 0 }}
               >
                 Schedule Free Consultation
               </motion.button>
               <motion.button
-                className="px-8 py-4 font-semibold rounded-full border-2 hover:opacity-70 flex items-center justify-center gap-2"
-                style={{ borderColor: 'var(--gold-accent)', color: 'var(--gold-accent)' }}
+                className="px-5 sm:px-8 py-3 sm:py-4 font-semibold rounded-full border-2 hover:opacity-70 flex items-center justify-center gap-2 w-full sm:w-auto"
+                style={{ borderColor: 'var(--gold-accent)', color: 'var(--gold-accent)', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}
                 whileHover={{ scale: 1.05 }}
               >
                 Call Now <ChevronRight size={18} />
               </motion.button>
             </motion.div>
 
-            <motion.div className="pt-8 space-y-6 border-t" style={{ borderColor: 'var(--light-border)' }} variants={itemVariants}>
-              <div className="flex gap-8">
+            <motion.div className="pt-4 sm:pt-6 md:pt-8 space-y-4 sm:space-y-6 border-t" style={{ borderColor: 'var(--light-border)' }} variants={itemVariants}>
+              <div className="flex gap-4 sm:gap-6 md:gap-8">
                 <motion.div whileHover={{ scale: 1.1 }}>
-                  <div className="serif-display text-4xl font-bold" style={{ color: 'var(--gold-accent)' }}>25+</div>
-                  <p className="text-sm mt-2 font-bold" style={{ color: 'var(--gold-accent)' }}>Years Experience</p>
+                  <div className="serif-display font-bold" style={{ color: 'var(--gold-accent)', fontSize: 'clamp(1.875rem, 4vw, 2.25rem)' }}>25+</div>
+                  <p className="mt-1 sm:mt-2 font-bold" style={{ color: 'var(--gold-accent)', fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)' }}>Years Experience</p>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.1 }}>
-                  <div className="serif-display text-4xl font-bold" style={{ color: 'var(--gold-accent)' }}>1000+</div>
-                  <p className="text-sm mt-2 font-bold" style={{ color: 'var(--gold-accent)' }}>Cases Won</p>
+                  <div className="serif-display font-bold" style={{ color: 'var(--gold-accent)', fontSize: 'clamp(1.875rem, 4vw, 2.25rem)' }}>1000+</div>
+                  <p className="mt-1 sm:mt-2 font-bold" style={{ color: 'var(--gold-accent)', fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)' }}>Cases Won</p>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.1 }}>
-                  <div className="serif-display text-4xl font-bold" style={{ color: 'var(--gold-accent)' }}>98%</div>
-                  <p className="text-sm mt-2 font-bold" style={{ color: 'var(--gold-accent)' }}>Success Rate</p>
+                  <div className="serif-display font-bold" style={{ color: 'var(--gold-accent)', fontSize: 'clamp(1.875rem, 4vw, 2.25rem)' }}>98%</div>
+                  <p className="mt-1 sm:mt-2 font-bold" style={{ color: 'var(--gold-accent)', fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)' }}>Success Rate</p>
                 </motion.div>
               </div>
             </motion.div>
@@ -386,22 +450,22 @@ export default function Home() {
       </div>
 
       {/* Services Section - Enhanced */}
-      <section id="services" className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
+      <section id="services" className="py-12 sm:py-16 md:py-24 px-3 sm:px-4 md:px-6">
+        <div className="w-full max-w-7xl mx-auto">
           <motion.div
-            className="mb-20"
+            className="mb-8 sm:mb-12 md:mb-20"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '0px 0px -100px 0px' }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
+            <h2 className="serif-display font-bold mb-2 sm:mb-3 md:mb-4" style={{ color: 'var(--green-primary)', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
               Practice Areas
             </h2>
-            <p className="text-lg opacity-75 max-w-lg">Comprehensive legal services tailored to your situation</p>
+            <p className="opacity-75" style={{ fontSize: 'clamp(0.95rem, 2vw, 1.125rem)' }}>Comprehensive legal services tailored to your situation</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {[
               { icon: Users, title: 'Immigration Law', items: ['Family-based immigration', 'Employment visa sponsorship', 'Deportation defense', 'Naturalization & citizenship'] },
               { icon: Scale, title: 'Criminal Defense', items: ['Traffic violations', 'Felony & misdemeanor charges', 'Juvenile delinquency', 'Federal representation'] },
@@ -436,8 +500,8 @@ export default function Home() {
       </section>
 
       {/* Attorney Spotlight - Enhanced */}
-      <section id="about" className="py-24 px-6 border-b" style={{ borderColor: 'var(--light-border)' }}>
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <section id="about" className="py-12 sm:py-16 md:py-24 px-3 sm:px-4 md:px-6 border-b" style={{ borderColor: 'var(--light-border)' }}>
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           <motion.div
             className="hidden md:block relative h-96"
             initial={{ opacity: 0, x: -100 }}
@@ -447,25 +511,25 @@ export default function Home() {
           >
             <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop"
-                alt="John Eluwa"
+                src="/office.png"
+                alt="Law Office of John Eluwa"
                 className="w-full h-full object-cover"
               />
             </div>
           </motion.div>
 
           <motion.div
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8"
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '0px 0px -100px 0px' }}
             transition={{ duration: 0.8 }}
           >
             <div>
-              <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
+              <h2 className="serif-display font-bold mb-2 sm:mb-3 md:mb-4" style={{ color: 'var(--green-primary)', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
                 Meet John Eluwa, Esq.
               </h2>
-              <p className="text-lg leading-relaxed opacity-85">
+              <p className="leading-relaxed opacity-85" style={{ fontSize: 'clamp(0.95rem, 2vw, 1.125rem)' }}>
                 A dedicated immigration and criminal defense attorney with 25+ years protecting families and fighting for clients' rights.
               </p>
             </div>
@@ -495,22 +559,22 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us - NEW */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-12 sm:py-16 md:py-24 px-3 sm:px-4 md:px-6 bg-white">
+        <div className="w-full max-w-7xl mx-auto">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-8 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '0px 0px -100px 0px' }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
+            <h2 className="serif-display font-bold mb-2 sm:mb-3 md:mb-4" style={{ color: 'var(--green-primary)', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
               Why Choose Us
             </h2>
-            <p className="text-lg opacity-75">Our commitment to your success</p>
+            <p className="opacity-75" style={{ fontSize: 'clamp(0.95rem, 2vw, 1.125rem)' }}>Our commitment to your success</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {[
               { icon: Zap, title: 'Experience', desc: '25+ years of proven legal expertise' },
               { icon: Heart, title: 'Compassion', desc: 'We care about you as a person' },
@@ -539,21 +603,21 @@ export default function Home() {
       </section>
 
       {/* Courts - Can Practice Before */}
-      <section className="py-24 px-6 bg-stone-100">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-12 sm:py-16 md:py-24 px-3 sm:px-4 md:px-6 bg-stone-100">
+        <div className="w-full max-w-7xl mx-auto">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-8 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '0px 0px -100px 0px' }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="serif-display text-5xl md:text-6xl font-bold" style={{ color: 'var(--green-primary)' }}>
+            <h2 className="serif-display font-bold" style={{ color: 'var(--green-primary)', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
               Can Practice Before:
             </h2>
           </motion.div>
 
-          <div className="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-16">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 lg:gap-16">
             <motion.div
               className="w-full md:w-auto flex justify-center"
               initial={{ opacity: 0, x: -100 }}
@@ -564,7 +628,8 @@ export default function Home() {
               <img
                 src="https://www.johneluwa.com/images/sc.png"
                 alt="US Supreme Court Seal"
-                className="h-64 w-64 object-contain"
+                className="object-contain"
+                style={{ height: 'clamp(120px, 30vw, 256px)', width: 'auto' }}
               />
             </motion.div>
 
@@ -578,7 +643,8 @@ export default function Home() {
               <img
                 src="https://www.johneluwa.com/images/ncsc.jpg"
                 alt="North Carolina Supreme Court Seal"
-                className="h-64 w-64 object-contain"
+                className="object-contain"
+                style={{ height: 'clamp(120px, 30vw, 256px)', width: 'auto' }}
               />
             </motion.div>
           </div>
@@ -586,9 +652,9 @@ export default function Home() {
       </section>
 
       {/* Stats Counter - NEW */}
-      <section className="py-24 px-6" style={{ backgroundColor: 'var(--green-primary)', color: 'white' }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
+      <section className="py-12 sm:py-16 md:py-24 px-3 sm:px-4 md:px-6" style={{ backgroundColor: 'var(--green-primary)', color: 'white' }}>
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
             {[
               { num: 1000, label: 'Cases Won' },
               { num: 25, label: 'Years Experience' },
@@ -613,22 +679,22 @@ export default function Home() {
       </section>
 
       {/* Testimonials - Expanded */}
-      <section id="testimonials" className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
+      <section id="testimonials" className="py-12 sm:py-16 md:py-24 px-3 sm:px-4 md:px-6">
+        <div className="w-full max-w-7xl mx-auto">
           <motion.div
-            className="mb-16"
+            className="mb-8 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '0px 0px -100px 0px' }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
+            <h2 className="serif-display font-bold mb-2 sm:mb-3 md:mb-4" style={{ color: 'var(--green-primary)', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
               What Clients Say
             </h2>
-            <p className="text-lg opacity-75">Real results, real families, real trust</p>
+            <p className="opacity-75" style={{ fontSize: 'clamp(0.95rem, 2vw, 1.125rem)' }}>Real results, real families, real trust</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {[
               { name: 'Maria Garcia', city: 'Raleigh, NC', text: 'John helped my family reunite. Professional, compassionate, and got results!' },
               { name: 'David Chen', city: 'Durham, NC', text: 'Outstanding expertise in employment visas. Made a complex process smooth.' },
@@ -664,22 +730,22 @@ export default function Home() {
       </section>
 
       {/* Blog Preview - NEW */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-12 sm:py-16 md:py-24 px-3 sm:px-4 md:px-6 bg-white">
+        <div className="w-full max-w-7xl mx-auto">
           <motion.div
-            className="mb-16"
+            className="mb-8 sm:mb-12 md:mb-16"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '0px 0px -100px 0px' }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
+            <h2 className="serif-display font-bold mb-2 sm:mb-3 md:mb-4" style={{ color: 'var(--green-primary)', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
               Latest Insights
             </h2>
-            <p className="text-lg opacity-75">Tips and guides for immigration and legal matters</p>
+            <p className="opacity-75" style={{ fontSize: 'clamp(0.95rem, 2vw, 1.125rem)' }}>Tips and guides for immigration and legal matters</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {[
               { date: 'Apr 5, 2024', title: 'Guide to Family-Based Immigration', excerpt: 'Learn the step-by-step process to sponsor family members for permanent residence and US citizenship.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&h=300&fit=crop' },
               { date: 'Apr 2, 2024', title: 'Understanding Deportation Defense', excerpt: 'What to do if you\'re facing removal proceedings and how to protect your rights immediately.', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=300&fit=crop' },
@@ -762,39 +828,39 @@ export default function Home() {
       </section>
 
       {/* Consultation CTA - Enhanced */}
-      <section className="py-24 px-6" style={{ backgroundColor: 'var(--green-primary)' }}>
-        <div className="max-w-5xl mx-auto text-center space-y-12 text-white">
+      <section className="py-12 sm:py-16 md:py-24 px-3 sm:px-4 md:px-6" style={{ backgroundColor: 'var(--green-primary)' }}>
+        <div className="w-full max-w-5xl mx-auto text-center space-y-8 sm:space-y-10 md:space-y-12 text-white">
           <motion.div
-            className="space-y-4"
+            className="space-y-3 sm:space-y-4"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '0px 0px -100px 0px' }}
             transition={{ duration: 0.7 }}
           >
             <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }}>
-              <Calendar size={56} className="mx-auto" style={{ color: 'var(--gold-accent)' }} />
+              <Calendar className="mx-auto" style={{ color: 'var(--gold-accent)', width: 'clamp(40px, 8vw, 56px)', height: 'clamp(40px, 8vw, 56px)' }} />
             </motion.div>
-            <h2 className="serif-display text-5xl md:text-6xl font-bold">
+            <h2 className="serif-display font-bold" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
               Your Future Begins
             </h2>
-            <p className="text-3xl font-light">With One Call.</p>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
+            <p className="font-light" style={{ fontSize: 'clamp(1.25rem, 4vw, 1.875rem)' }}>With One Call.</p>
+            <p className="opacity-90" style={{ fontSize: 'clamp(0.95rem, 2vw, 1.25rem)' }}>
               Stop stressing about your legal situation. Schedule your free consultation and let us fight for you.
             </p>
           </motion.div>
 
-          <motion.div className="flex flex-col sm:flex-row gap-4 justify-center" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <motion.div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             <motion.button
-              className="px-8 py-4 font-semibold rounded-full text-green-900 hover:shadow-lg"
-              style={{ backgroundColor: 'white' }}
+              className="px-5 sm:px-8 py-3 sm:py-4 font-semibold rounded-full text-green-900 hover:shadow-lg w-full sm:w-auto"
+              style={{ backgroundColor: 'white', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}
               whileHover={{ y: -4 }}
               variants={itemVariants}
             >
               Book Online Now
             </motion.button>
             <motion.button
-              className="px-8 py-4 font-semibold rounded-full border-2 border-white hover:bg-green-700"
-              style={{ color: 'white' }}
+              className="px-5 sm:px-8 py-3 sm:py-4 font-semibold rounded-full border-2 border-white hover:bg-green-700 w-full sm:w-auto"
+              style={{ color: 'white', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}
               whileHover={{ y: -4 }}
               variants={itemVariants}
             >
@@ -802,24 +868,24 @@ export default function Home() {
             </motion.button>
           </motion.div>
 
-          <p className="text-sm opacity-75">Available Mon-Fri, 9am-5pm EST • Spanish interpreter available • Se Habla Español</p>
+          <p className="opacity-75" style={{ fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)' }}>Available Mon-Fri, 9am-5pm EST • Spanish interpreter available • Se Habla Español</p>
         </div>
       </section>
 
       {/* Contact Form Section - NEW */}
-      <section id="contact" className="py-24 px-6 bg-white">
-        <div className="max-w-2xl mx-auto">
+      <section id="contact" className="py-12 sm:py-16 md:py-24 px-3 sm:px-4 md:px-6 bg-white">
+        <div className="w-full max-w-2xl mx-auto">
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-10 md:mb-12"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '0px 0px -100px 0px' }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="serif-display text-5xl md:text-6xl font-bold mb-4" style={{ color: 'var(--green-primary)' }}>
+            <h2 className="serif-display font-bold mb-2 sm:mb-3 md:mb-4" style={{ color: 'var(--green-primary)', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
               Get in Touch
             </h2>
-            <p className="text-lg opacity-75">Send us a message and we'll respond within 24 hours</p>
+            <p className="opacity-75" style={{ fontSize: 'clamp(0.95rem, 2vw, 1.125rem)' }}>Send us a message and we'll respond within 24 hours</p>
           </motion.div>
 
           <motion.form
@@ -893,8 +959,8 @@ export default function Home() {
       </section>
 
       {/* Footer - Enhanced */}
-      <footer className="py-8 md:py-16 px-4 md:px-6" style={{ backgroundColor: 'var(--green-primary)', color: 'white' }}>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12 mb-8 md:mb-12 pb-8 md:pb-12 border-b" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+      <footer className="py-6 sm:py-8 md:py-12 lg:py-16 px-3 sm:px-4 md:px-6" style={{ backgroundColor: 'var(--green-primary)', color: 'white' }}>
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-12 mb-6 sm:mb-8 md:mb-10 lg:mb-12 pb-6 sm:pb-8 md:pb-10 lg:pb-12 border-b" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
           <div>
             <h4 className="serif-display font-bold mb-3 md:mb-4" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)' }}>John Eluwa, PLLC</h4>
             <p className="opacity-80 mb-2" style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1rem)' }}>Professional legal services since 1995</p>
@@ -962,10 +1028,10 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="text-center opacity-75 space-y-1 md:space-y-2" style={{ fontSize: 'clamp(0.75rem, 1vw, 0.875rem)' }}>
+        <div className="text-center opacity-75 space-y-0.5 sm:space-y-1 md:space-y-2" style={{ fontSize: 'clamp(0.7rem, 1vw, 0.875rem)' }}>
           <p>&copy; 2024 Law Offices of John Eluwa, PLLC. All rights reserved.</p>
           <p>This website is for informational purposes only. Not a substitute for legal advice. Prior results do not guarantee outcomes.</p>
-          <p className="pt-1 md:pt-2 border-t" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+          <p className="pt-0.5 sm:pt-1 md:pt-2 border-t" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
             Powered by <a href="https://appwizardpro.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition font-semibold">App Wizard</a>
           </p>
         </div>
