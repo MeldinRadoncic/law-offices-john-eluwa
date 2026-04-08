@@ -99,13 +99,18 @@ export default function Home() {
       {/* Navigation - Enhanced */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-white/95'}`}>
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex justify-between items-center">
-          <motion.div
-            className="serif-display font-bold"
-            style={{ fontSize: 'clamp(1.25rem, 4vw, 2rem)', color: 'var(--green-primary)' }}
+          <motion.a
+            href="#"
             whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-2"
           >
-            John Eluwa
-          </motion.div>
+            <img
+              src="https://www.johneluwa.com/images/EagleLogo.png"
+              alt="Law Offices of John Eluwa"
+              style={{ height: 'clamp(40px, 8vw, 60px)', width: 'auto' }}
+              className="object-contain"
+            />
+          </motion.a>
 
           <div className="hidden md:flex gap-4 lg:gap-8 xl:gap-12 font-medium" style={{ fontSize: 'clamp(0.875rem, 1.5vw, 1.125rem)' }}>
             {['Services', 'About', 'Testimonials', 'Contact'].map((link) => (
