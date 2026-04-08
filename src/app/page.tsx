@@ -777,36 +777,60 @@ export default function Home() {
 
           <div>
             <h4 className="font-semibold mb-3 md:mb-4" style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.125rem)' }}>Practice Areas</h4>
-            <ul className="space-y-2 opacity-80" style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1rem)' }}>
-              <li><a href="#services" className="hover:opacity-100 transition">Immigration Law</a></li>
-              <li><a href="#services" className="hover:opacity-100 transition">Criminal Defense</a></li>
-              <li><a href="#services" className="hover:opacity-100 transition">Personal Injury</a></li>
+            <ul className="space-y-2 md:space-y-3" style={{ fontSize: 'clamp(0.875rem, 1.4vw, 1.05rem)' }}>
+              <li><a href="#services" className="text-white font-medium hover:text-yellow-300 hover:underline transition-all duration-300 inline-flex items-center gap-2 group">
+                <span className="group-hover:translate-x-1 transition-transform">Immigration Law</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+              </a></li>
+              <li><a href="#services" className="text-white font-medium hover:text-yellow-300 hover:underline transition-all duration-300 inline-flex items-center gap-2 group">
+                <span className="group-hover:translate-x-1 transition-transform">Criminal Defense</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+              </a></li>
+              <li><a href="#services" className="text-white font-medium hover:text-yellow-300 hover:underline transition-all duration-300 inline-flex items-center gap-2 group">
+                <span className="group-hover:translate-x-1 transition-transform">Personal Injury</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+              </a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold mb-3 md:mb-4" style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.125rem)' }}>Quick Links</h4>
-            <ul className="space-y-2 opacity-80" style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1rem)' }}>
-              <li><a href="#about" className="hover:opacity-100 transition">About John Eluwa</a></li>
-              <li><a href="#testimonials" className="hover:opacity-100 transition">Testimonials</a></li>
-              <li><a href="#contact" className="hover:opacity-100 transition">Contact</a></li>
+            <ul className="space-y-2 md:space-y-3" style={{ fontSize: 'clamp(0.875rem, 1.4vw, 1.05rem)' }}>
+              <li><a href="#about" className="text-white font-medium hover:text-yellow-300 hover:underline transition-all duration-300 inline-flex items-center gap-2 group">
+                <span className="group-hover:translate-x-1 transition-transform">About John Eluwa</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+              </a></li>
+              <li><a href="#testimonials" className="text-white font-medium hover:text-yellow-300 hover:underline transition-all duration-300 inline-flex items-center gap-2 group">
+                <span className="group-hover:translate-x-1 transition-transform">Testimonials</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+              </a></li>
+              <li><a href="#contact" className="text-white font-medium hover:text-yellow-300 hover:underline transition-all duration-300 inline-flex items-center gap-2 group">
+                <span className="group-hover:translate-x-1 transition-transform">Contact</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+              </a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold mb-3 md:mb-4" style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.125rem)' }}>Connect</h4>
-            <div className="flex gap-3 md:gap-4 opacity-80 mb-4 md:mb-6" style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1rem)' }}>
-              <a href="#" className="hover:opacity-100 transition">LinkedIn</a>
-              <a href="#" className="hover:opacity-100 transition">Facebook</a>
-              <a href="#" className="hover:opacity-100 transition">Google</a>
+            <div className="flex flex-wrap gap-3 md:gap-4 mb-4 md:mb-6" style={{ fontSize: 'clamp(0.875rem, 1.4vw, 1.05rem)' }}>
+              <a href="#" className="text-white font-medium hover:text-yellow-300 hover:underline transition-all duration-300 inline-flex items-center gap-2 group">
+                <span className="group-hover:translate-x-1 transition-transform">LinkedIn</span>
+              </a>
+              <a href="#" className="text-white font-medium hover:text-yellow-300 hover:underline transition-all duration-300 inline-flex items-center gap-2 group">
+                <span className="group-hover:translate-x-1 transition-transform">Facebook</span>
+              </a>
+              <a href="#" className="text-white font-medium hover:text-yellow-300 hover:underline transition-all duration-300 inline-flex items-center gap-2 group">
+                <span className="group-hover:translate-x-1 transition-transform">Google</span>
+              </a>
             </div>
             <div>
-              <p className="font-semibold mb-2" style={{ fontSize: 'clamp(0.875rem, 1.3vw, 1rem)' }}>Newsletter</p>
+              <p className="font-semibold mb-3" style={{ fontSize: 'clamp(0.875rem, 1.4vw, 1.05rem)' }}>Newsletter</p>
               <input
                 type="email"
                 placeholder="Your email"
-                className="w-full px-3 py-2 rounded text-black"
-                style={{ fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)' }}
+                className="w-full px-4 py-3 rounded font-medium text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-all"
+                style={{ fontSize: 'clamp(0.875rem, 1.2vw, 1rem)' }}
               />
             </div>
           </div>
