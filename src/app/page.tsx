@@ -481,8 +481,8 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 whileHover={{ scale: 1.02 }}
               >
-                <div className="flex md:block justify-center">
-                  <service.icon size={40} style={{ color: 'var(--green-primary)' }} className="mb-6" />
+                <div className="flex justify-center mb-6">
+                  <service.icon size={40} style={{ color: 'var(--green-primary)' }} />
                 </div>
                 <h3 className="serif-display text-2xl font-bold mb-6" style={{ color: 'var(--green-primary)' }}>
                   {service.title}
